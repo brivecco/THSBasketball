@@ -1,0 +1,16 @@
+.flex-container-stat {
+    display:flex;
+    flex-wrap:wrap;
+    background-color: palegoldenrod;
+    width:100%;
+    margin:0;
+    padding-right:10px;
+  }
+
+  .flex-stat {
+    width:25%;
+    margin: 10px;
+    padding: 20px;
+    font-size: 20px;
+  }
+  

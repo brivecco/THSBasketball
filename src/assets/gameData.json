@@ -1,0 +1,121 @@
+{
+    "HomeSchool": {
+        "SchoolId": "TVL",
+        "Name": "Bonkerville",
+        "Nickname": "Tornadoes"
+    },
+    "VisitorSchool": {
+        "SchoolId": "MHS",
+        "Name": "Mahomet-Seymour",
+        "Nickname": "Bulldogs"
+    },
+    "HomeRoster": [
+        {
+            "SchoolId": "TVL",
+            "PlayerId": "TV1",
+            "FirstName": "Drake",
+            "LastName": "Howard"
+        },
+        {
+            "SchoolId": "TVL",
+            "PlayerId": "TV2",
+            "FirstName": "Will",
+            "LastName": "Turvey"
+        },
+        {
+            "SchoolId": "TVL",
+            "PlayerId": "TV3",
+            "FirstName": "Will",
+            "LastName": "Bitschenauer"
+        },
+        {
+            "SchoolId": "TVL",
+            "PlayerId": "TV4",
+            "FirstName": "Clark",
+            "LastName": "Durbin"
+        },
+        {
+            "SchoolId": "TVL",
+            "PlayerId": "TV5",
+            "FirstName": "Tharyn",
+            "LastName": "Wiseman"
+        }, 
+        {
+            "SchoolId": "TVL",
+            "PlayerId": "TV6",
+            "FirstName": "Cade",
+            "LastName": "Beckmeir"
+        },
+        {
+            "SchoolId": "TVL",
+            "PlayerId": "TV7",
+            "FirstName": "Miles",
+            "LastName": "Clayton"
+        },
+        {
+            "SchoolId": "TVL",
+            "PlayerId": "TV8",
+            "FirstName": "Cash",
+            "LastName": "Foraker"
+        },
+        {
+            "SchoolId": "TVL",
+            "PlayerId": "TV9",
+            "FirstName": "Baron",
+            "LastName": "Odam"
+        },
+        {
+            "SchoolId": "TVL",
+            "PlayerId": "TV10",
+            "FirstName": "Seth",
+            "LastName": "Hughes"
+        },
+        {
+            "SchoolId": "TVL",
+            "PlayerId": "TV11",
+            "FirstName": "Matthew",
+            "LastName": "Geddings"
+        },
+        {
+            "SchoolId": "TVL",
+            "PlayerId": "TV12",
+            "FirstName": "Kaden",
+            "LastName": "Turpac"
+        }
+    ],
+    "VisitorRoster": [
+        {
+
+            "SchoolId": "MHS",
+            "PlayerId": "MT1",
+            "FirstName": "John",
+            "LastName": "Wall"
+        },
+        { "SchoolId": "MHS",
+            "PlayerId": "MT2",
+            "FirstName": "Al",
+            "LastName": "Harrington"
+        },
+        {
+            "SchoolId": "MHS",
+            "PlayerId": "MT3",
+            "FirstName": "Charles",
+            "LastName": "Pinkney"
+        },
+        {
+            "SchoolId": "MHS",
+            "PlayerId": "MT4",
+            "FirstName": "Damian",
+            "LastName": "Lillard"
+        },
+        {
+            "SchoolId": "MHS",
+            "PlayerId": "MT5",
+            "FirstName": "Miles",
+            "LastName": "Davidson"
+        }
+    ],
+    "StatItems" : [
+    ]
+
+}
