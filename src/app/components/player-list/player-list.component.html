@@ -20,6 +20,6 @@
      (click)="selectRow(row,i)"></tr>
   </table>
   </div>
-  <mat-checkbox #onTheFloor (click)="setFloorList()">On the floor only</mat-checkbox>
+  <mat-checkbox (change)="setFloorList($event)">On the floor only</mat-checkbox>
  
  

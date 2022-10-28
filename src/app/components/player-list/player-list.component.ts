@@ -1,5 +1,5 @@
 import { Component, Input, Output,EventEmitter, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, Subject } from 'rxjs';
 import { Game } from 'src/app/models/game';
 import { Player } from 'src/app/models/player';
 import { GameService } from 'src/app/services/game.service';
@@ -15,24 +15,27 @@ export class PlayerListComponent {
   @Output() selectPlayer:EventEmitter<Player>=new EventEmitter<Player>();
 
   displayedColumns: string[] = ['FullName',"Actions"];
-  roster$: Observable<Player[]> = this.gameService.currentGame$.pipe(
+
+  onTheFloorOnly$: BehaviorSubject<boolean>= new BehaviorSubject<boolean>(false);
+  roster$: Observable<Player[]> =  combineLatest([this.gameService.currentGame$.pipe(
     map(game => this.filterRosterList(game))
+  ), this.onTheFloorOnly$]).pipe(
+    map(([players, onFloor]) => onFloor ? players.filter(p=> p.OnFloor) : players )
   );
   selectedRowIndex:number=-1;
-  onTheFloorOnly:boolean=true;
+
 
   constructor(private gameService: GameService) { }
 
 
   filterRosterList(game: Game) : Player[] {
-
     switch(this.rosterType) {
       case "home":
         return game.HomeRoster;
-        case "visitor":
-          return game.VisitorRoster;
-        default:
-          return [...game.HomeRoster, ...game.VisitorRoster];
+      case "visitor":
+        return game.VisitorRoster;
+      default:
+        return [...game.HomeRoster, ...game.VisitorRoster];
   }
 }
   selectRow(player:Player,rowIndex:number) {
@@ -44,8 +47,8 @@ export class PlayerListComponent {
     e.stopPropagation();
   }
 
-  setFloorList(){
-    
+  setFloorList(onFloor: any){
+    this.onTheFloorOnly$.next(onFloor.checked);
   }
 
 }
