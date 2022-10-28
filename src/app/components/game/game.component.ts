@@ -6,6 +6,7 @@ import { Player } from 'src/app/models/player';
 import { School } from 'src/app/models/school';
 import { StatItem } from 'src/app/models/statitem';
 import { GameService } from 'src/app/services/game.service';
+import { PlayerService } from 'src/app/services/player.service';
 import { StatItemListComponent } from '../statitem-list/statitem-list.component';
 
 
@@ -23,14 +24,14 @@ export class GameComponent {
     
   
   public game$ :Observable<Game>= this.gameService.currentGame$;
-  public currentPlayer:Player=null;
+  public currentPlayer$:Observable<Player>= this.playerService.currentPlayer$;
 
-  constructor(private gameService: GameService) {
+  constructor(private gameService: GameService, private playerService: PlayerService) {
 
   }
 
   public playerSelected(player:Player) {
-    this.currentPlayer=player;
+    this.playerService.selectCurrentPlayer(player);
   }
 
   public showStatItem(statItem:StatItem) {

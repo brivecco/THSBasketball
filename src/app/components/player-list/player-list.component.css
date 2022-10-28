@@ -14,3 +14,15 @@ table {
   background-color: tan;
 }
 
+.on-floor {
+  background-color: #c6fdbf;
+}
+
+.out-floor {
+  background-color: #ffb8b8;
+}
+
+.selected{
+  background-color: #8ac2ff;
+}
+

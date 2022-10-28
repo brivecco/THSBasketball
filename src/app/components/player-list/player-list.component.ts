@@ -3,6 +3,7 @@ import { BehaviorSubject, combineLatest, map, Observable, Subject } from 'rxjs';
 import { Game } from 'src/app/models/game';
 import { Player } from 'src/app/models/player';
 import { GameService } from 'src/app/services/game.service';
+import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
   selector: 'app-player-list',
@@ -14,6 +15,8 @@ export class PlayerListComponent {
   @Input() rosterType:string;
   @Output() selectPlayer:EventEmitter<Player>=new EventEmitter<Player>();
 
+
+
   displayedColumns: string[] = ['FullName',"Actions"];
 
   onTheFloorOnly$: BehaviorSubject<boolean>= new BehaviorSubject<boolean>(false);
@@ -22,10 +25,12 @@ export class PlayerListComponent {
   ), this.onTheFloorOnly$]).pipe(
     map(([players, onFloor]) => onFloor ? players.filter(p=> p.OnFloor) : players )
   );
+  currentPlayer$: Observable<Player> = this.playerService.currentPlayer$;
+
   selectedRowIndex:number=-1;
 
 
-  constructor(private gameService: GameService) { }
+  constructor(private gameService: GameService, private playerService: PlayerService) { }
 
 
   filterRosterList(game: Game) : Player[] {
