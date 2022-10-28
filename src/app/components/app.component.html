@@ -12,7 +12,7 @@
    <app-stat-actions [game]="game" [currentPlayer]="currentPlayer" (action)="actionAdded()"></app-stat-actions>
   </div>
   <div class="flex-right-edge">
-    <app-statitem-list #statItemPanel [game]="game" [rosterType]="'home'" (selectStatitem)="showStatItem($event)"
+    <app-statitem-list #statItemPanel [game]="game" (selectStatitem)="showStatItem($event)"
     [currentPlayer]="currentPlayer"></app-statitem-list>
   </div>
 </div>

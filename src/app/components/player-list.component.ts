@@ -13,8 +13,9 @@ export class PlayerListComponent implements OnInit {
   @Input() rosterType:string;
   @Output() selectPlayer:EventEmitter<Player>=new EventEmitter<Player>();
 
-  displayedColumns: string[] = ['FullName'];
+  displayedColumns: string[] = ['FullName',"Actions"];
   roster:Player[];
+  selectedRowIndex:number=-1;
 
   constructor() { }
 
@@ -34,7 +35,12 @@ export class PlayerListComponent implements OnInit {
     
   }
 
-  selectRow(player:Player) {
+  selectRow(player:Player,rowIndex:number) {
+    this.selectedRowIndex=rowIndex;
     this.selectPlayer.emit(player);
+  }
+
+  buttonClick(e:any) {
+    e.stopPropagation();
   }
 }

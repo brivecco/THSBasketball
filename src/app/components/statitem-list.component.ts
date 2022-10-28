@@ -12,10 +12,9 @@ import { StatItem } from '../models/statitem';
 export class StatItemListComponent implements OnInit {
   @Input() game: Game;
   @Input() currentPlayer: Player;
-  @Input() rosterType:string;
-  
   @Output() selectStatitem:EventEmitter<StatItem>=new EventEmitter<StatItem>();
 
+  rosterType:string="all";
   displayedColumns: string[] = ['Description'];
   statItems:StatItem[];
 
@@ -36,7 +35,7 @@ updateItems() {
         this.statItems=this.game.StatItems.filter(si=>si.SchoolId===this.game.VisitorSchool.SchoolId);
         break;
       default:
-        this.statItems=this.game.StatItems;
+        this.statItems=[...this.game.StatItems];
         break;
   }
   

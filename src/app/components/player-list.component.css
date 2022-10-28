@@ -2,4 +2,15 @@
     min-height: 250px ;
     max-height: 250px ;
     overflow: auto ;
+    width:100%;
+
   }
+
+table {
+  width:100%
+}
+
+.mat-row:hover {
+  background-color: tan;
+}
+
