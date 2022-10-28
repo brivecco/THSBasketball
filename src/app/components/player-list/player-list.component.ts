@@ -1,7 +1,6 @@
 import { Component, Input, Output,EventEmitter, OnInit } from '@angular/core';
-import { Game } from '../models/game';
-import { School } from '../models/school';
-import { Player } from '../models/player';
+import { Game } from 'src/app/models/game';
+import { Player } from 'src/app/models/player';
 
 @Component({
   selector: 'app-player-list',

@@ -1,10 +1,10 @@
 import { Component, Input, Output,EventEmitter } from '@angular/core';
-import { Game } from '../models/game';
-import { School } from '../models/school';
-import { Player } from '../models/player';
-import { StatItem } from '../models/statitem';
-import { GameAction } from '../models/gameAction';
+
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Game } from 'src/app/models/game';
+import { GameAction } from 'src/app/models/gameAction';
+import { Player } from 'src/app/models/player';
+import { StatItem } from 'src/app/models/statitem';
 
 
 @Component({

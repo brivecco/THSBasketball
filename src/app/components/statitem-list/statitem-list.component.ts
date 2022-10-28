@@ -1,8 +1,8 @@
 import { Component, Input, Output,EventEmitter, OnInit } from '@angular/core';
-import { Game } from '../models/game';
-import { School } from '../models/school';
-import { Player } from '../models/player';
-import { StatItem } from '../models/statitem';
+import { Game } from 'src/app/models/game';
+import { Player } from 'src/app/models/player';
+import { StatItem } from 'src/app/models/statitem';
+
 
 @Component({
   selector: 'app-statitem-list',

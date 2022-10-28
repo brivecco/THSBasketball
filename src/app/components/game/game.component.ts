@@ -6,7 +6,8 @@ import { Player } from 'src/app/models/player';
 import { School } from 'src/app/models/school';
 import { StatItem } from 'src/app/models/statitem';
 import { GameService } from 'src/app/services/game.service';
-import { StatItemListComponent } from '../statitem-list.component';
+import { StatItemListComponent } from '../statitem-list/statitem-list.component';
+
 
 @Component({
   selector: 'app-game',
@@ -16,6 +17,7 @@ import { StatItemListComponent } from '../statitem-list.component';
 export class GameComponent {
 
   @ViewChild("statItemPanel") statItemPanel:StatItemListComponent;
+  
   public schools : School[] = [
     {SchoolId:"tv1",Name:"Taylorville",Nickname:"Tornadoes"},
     {SchoolId:"mtz1",Name:"Mount Zion",Nickname:"Braves"}
