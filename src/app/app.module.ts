@@ -12,6 +12,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { StatActionsComponent } from './components/stat-actions.component';
 import { StatItemListComponent } from './components/statitem-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GameComponent } from './components/game/game.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PlayerListComponent,
     StatActionsComponent,
     StatItemListComponent,
+    GameComponent,
   ],
   imports: [
     BrowserModule,
