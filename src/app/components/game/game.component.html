@@ -4,13 +4,14 @@
   } as observables">
   
   <div class="top-flex-container">
-    <div class="flex-left-edge">{{observables.game?.VisitorSchool?.Name}}</div>
+    <div class="flex-left-edge">{{observables.game?.HomeSchool?.Name}}</div>
     <div class="flex-center">middle</div>
     <div class="flex-right-edge">{{observables.game?.VisitorSchool?.Name}}</div>
   </div>
   <div class="bottom-flex-container">
     <div class="flex-left-edge">
       <app-player-list [rosterType]="'home'" (selectPlayer)="playerSelected($event)"></app-player-list>
+      <br/>
      <app-player-list [rosterType]="'visitor'" (selectPlayer)="playerSelected($event)"></app-player-list>
     </div>
     <div class="flex-center">

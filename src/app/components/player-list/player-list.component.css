@@ -10,6 +10,10 @@ table {
   width:100%
 }
 
+.mat-card-title{
+  font-size: 14px;
+}
+
 .mat-row:hover {
   background-color: tan;
 }
@@ -20,6 +24,10 @@ table {
 
 .out-floor {
   background-color: #ffb8b8;
+}
+
+.selectedRow{
+  background-color: #cdc95b;
 }
 
 .selected{

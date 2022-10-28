@@ -11,11 +11,9 @@ import { PlayerService } from 'src/app/services/player.service';
   styleUrls: ['./player-list.component.css']
 })
 export class PlayerListComponent {
-  @Input() game: Game;
   @Input() rosterType:string;
+  @Input() showSelected: boolean = false;
   @Output() selectPlayer:EventEmitter<Player>=new EventEmitter<Player>();
-
-
 
   displayedColumns: string[] = ['FullName',"Actions"];
 
@@ -26,14 +24,26 @@ export class PlayerListComponent {
   ), this.onTheFloorOnly$]).pipe(
     map(([players, onFloor]) => onFloor ? players.filter(p=> p.OnFloor) : players )
   );
+
   currentPlayer$: Observable<Player> = this.playerService.currentPlayer$;
 
   selectedRowIndex:number=-1;
+  selectedRow: Player = null;
+
+  schoolName$ = this.gameService.currentGame$.pipe(map(game => {
+    if(this.rosterType == "home"){
+      return game?.HomeSchool?.Name
+    } else if(this.rosterType == 'visitor'){
+      return game?.VisitorSchool?.Name;
+    }else{
+      return `${game?.HomeSchool?.Name} x ${game?.VisitorSchool?.Name}`;
+    }
+  }));
 
 
   constructor(private gameService: GameService, private playerService: PlayerService) { }
 
-
+  
   filterRosterList(game: Game) : Player[] {
     switch(this.rosterType) {
       case "home":
@@ -46,6 +56,7 @@ export class PlayerListComponent {
 }
   selectRow(player:Player,rowIndex:number) {
     this.selectedRowIndex=rowIndex;
+    this.selectedRow = player;
     this.selectPlayer.emit(player);
   }
 
