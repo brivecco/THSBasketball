@@ -10,11 +10,13 @@ import { MatTableModule } from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GameComponent } from './components/game/game.component';
 import { PlayerListComponent } from './components/player-list/player-list.component';
 import { StatActionsComponent } from './components/stat-actions/stat-actions.component';
 import { StatItemListComponent } from './components/statitem-list/statitem-list.component';
+import { PlayerSubComponent } from './components/player-sub/player-sub.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -23,16 +25,18 @@ import { StatItemListComponent } from './components/statitem-list/statitem-list.
     StatActionsComponent,
     StatItemListComponent,
     GameComponent,
+    PlayerSubComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     MatSliderModule,
     MatTableModule,
     MatButtonModule,
     MatCheckboxModule,
-    NgbModule
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

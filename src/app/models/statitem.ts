@@ -20,6 +20,10 @@ export class StatItem {
                 return " made a 3-pointer";
             case "3PF":
                 return " missed a 3-pointer";
+            case "subIn":
+                return " sub in";
+            case "subOut":
+                return " sub out";
             default:
                 return "Unknown Action!!";
         }

@@ -14,73 +14,85 @@
             "SchoolId": "TVL",
             "PlayerId": "TV1",
             "FirstName": "Drake",
-            "LastName": "Howard"
+            "LastName": "Howard",
+            "OnFloor": true
         },
         {
             "SchoolId": "TVL",
             "PlayerId": "TV2",
             "FirstName": "Will",
-            "LastName": "Turvey"
+            "LastName": "Turvey",
+            "OnFloor": true
         },
         {
             "SchoolId": "TVL",
             "PlayerId": "TV3",
             "FirstName": "Will",
-            "LastName": "Bitschenauer"
+            "LastName": "Bitschenauer",
+            "OnFloor": true
         },
         {
             "SchoolId": "TVL",
             "PlayerId": "TV4",
             "FirstName": "Clark",
-            "LastName": "Durbin"
+            "LastName": "Durbin",
+            "OnFloor": true
         },
         {
             "SchoolId": "TVL",
             "PlayerId": "TV5",
             "FirstName": "Tharyn",
-            "LastName": "Wiseman"
+            "LastName": "Wiseman",
+            "OnFloor": true
         }, 
         {
             "SchoolId": "TVL",
             "PlayerId": "TV6",
             "FirstName": "Cade",
-            "LastName": "Beckmeir"
+            "LastName": "Beckmeir",
+            "OnFloor": false
         },
         {
             "SchoolId": "TVL",
             "PlayerId": "TV7",
             "FirstName": "Miles",
-            "LastName": "Clayton"
+            "LastName": "Clayton",
+            "OnFloor": false
         },
         {
             "SchoolId": "TVL",
             "PlayerId": "TV8",
             "FirstName": "Cash",
-            "LastName": "Foraker"
+            "LastName": "Foraker",
+            "OnFloor": false
         },
         {
             "SchoolId": "TVL",
             "PlayerId": "TV9",
             "FirstName": "Baron",
-            "LastName": "Odam"
+            "LastName": "Odam",
+            "OnFloor": false
         },
         {
             "SchoolId": "TVL",
             "PlayerId": "TV10",
             "FirstName": "Seth",
-            "LastName": "Hughes"
+            "LastName": "Hughes",
+            "OnFloor": false
         },
         {
             "SchoolId": "TVL",
             "PlayerId": "TV11",
             "FirstName": "Matthew",
-            "LastName": "Geddings"
+            "LastName": "Geddings",
+            "OnFloor": false
         },
         {
             "SchoolId": "TVL",
             "PlayerId": "TV12",
             "FirstName": "Kaden",
-            "LastName": "Turpac"
+            "LastName": "Turpac",
+            "OnFloor": false
         }
     ],
     "VisitorRoster": [
@@ -89,35 +101,36 @@
             "SchoolId": "MHS",
             "PlayerId": "MT1",
             "FirstName": "John",
-            "LastName": "Wall"
+            "LastName": "Wall",
+            "OnFloor": true
         },
         { "SchoolId": "MHS",
             "PlayerId": "MT2",
             "FirstName": "Al",
-            "LastName": "Harrington"
+            "LastName": "Harrington",
+            "OnFloor": true
         },
         {
             "SchoolId": "MHS",
             "PlayerId": "MT3",
             "FirstName": "Charles",
-            "LastName": "Pinkney"
+            "LastName": "Pinkney",
+            "OnFloor": true
         },
         {
             "SchoolId": "MHS",
             "PlayerId": "MT4",
             "FirstName": "Damian",
-            "LastName": "Lillard"
+            "LastName": "Lillard",
+            "OnFloor": true
         },
         {
             "SchoolId": "MHS",
             "PlayerId": "MT5",
             "FirstName": "Miles",
-            "LastName": "Davidson"
+            "LastName": "Davidson",
+            "OnFloor": true
         }
-    ],
-    "HomeRosterOnFloor": [
-    ],
-    "VisitorRosterOnFloor": [
     ],
     "StatItems" : [
     ]
