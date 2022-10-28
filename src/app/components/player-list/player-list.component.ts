@@ -1,42 +1,38 @@
 import { Component, Input, Output,EventEmitter, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { Game } from 'src/app/models/game';
 import { Player } from 'src/app/models/player';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-player-list',
   templateUrl: './player-list.component.html',
   styleUrls: ['./player-list.component.css']
 })
-export class PlayerListComponent implements OnInit {
+export class PlayerListComponent {
   @Input() game: Game;
   @Input() rosterType:string;
   @Output() selectPlayer:EventEmitter<Player>=new EventEmitter<Player>();
 
   displayedColumns: string[] = ['FullName',"Actions"];
-  roster:Player[];
+  roster$: Observable<Player[]> = this.gameService.currentGame$.pipe(
+    map(game => this.filterRosterList(game))
+  );
   selectedRowIndex:number=-1;
   onTheFloorOnly:boolean=true;
 
-  constructor() { }
+  constructor(private gameService: GameService) { }
 
-  ngOnInit(): void {
-   
-   this.setRosterList()
-        
-  }
 
-  setRosterList() {
+  filterRosterList(game: Game) : Player[] {
 
     switch(this.rosterType) {
       case "home":
-        this.roster=this.game.HomeRoster;
-        break;
+        return game.HomeRoster;
         case "visitor":
-          this.roster=this.game.VisitorRoster;
-          break;
+          return game.VisitorRoster;
         default:
-          this.roster=[...this.game.HomeRoster,...this.game.VisitorRoster];
-          break;
+          return [...game.HomeRoster, ...game.VisitorRoster];
   }
 }
   selectRow(player:Player,rowIndex:number) {
@@ -48,7 +44,8 @@ export class PlayerListComponent implements OnInit {
     e.stopPropagation();
   }
 
-  setFloorList() {
-    this.setRosterList();
+  setFloorList(){
+    
   }
+
 }

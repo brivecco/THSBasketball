@@ -9,8 +9,8 @@
   </div>
   <div class="bottom-flex-container">
     <div class="flex-left-edge">
-      <app-player-list [game]="observables.game" [rosterType]="'home'" (selectPlayer)="playerSelected($event)"></app-player-list>
-     <app-player-list [game]="observables.game" [rosterType]="'visitor'" (selectPlayer)="playerSelected($event)"></app-player-list>
+      <app-player-list [rosterType]="'home'" (selectPlayer)="playerSelected($event)"></app-player-list>
+     <app-player-list [rosterType]="'visitor'" (selectPlayer)="playerSelected($event)"></app-player-list>
     </div>
     <div class="flex-center">
      <app-stat-actions [game]="observables.game" [currentPlayer]="currentPlayer" ></app-stat-actions>
