@@ -62,7 +62,6 @@ export class StatActionsComponent  {
 
     dialogRef.afterClosed().pipe(first(), filter(sub => sub))
     .subscribe(sub => {
-      debugger;
       let currentPlayer;
       let subPlayer;
       if(team === 'home'){
