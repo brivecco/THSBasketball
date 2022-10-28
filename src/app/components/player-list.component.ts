@@ -16,11 +16,18 @@ export class PlayerListComponent implements OnInit {
   displayedColumns: string[] = ['FullName',"Actions"];
   roster:Player[];
   selectedRowIndex:number=-1;
+  onTheFloorOnly:boolean=true;
 
   constructor() { }
 
   ngOnInit(): void {
    
+   this.setRosterList()
+        
+  }
+
+  setRosterList() {
+
     switch(this.rosterType) {
       case "home":
         this.roster=this.game.HomeRoster;
@@ -31,10 +38,8 @@ export class PlayerListComponent implements OnInit {
         default:
           this.roster=[...this.game.HomeRoster,...this.game.VisitorRoster];
           break;
-    }
-    
   }
-
+}
   selectRow(player:Player,rowIndex:number) {
     this.selectedRowIndex=rowIndex;
     this.selectPlayer.emit(player);
@@ -42,5 +47,9 @@ export class PlayerListComponent implements OnInit {
 
   buttonClick(e:any) {
     e.stopPropagation();
+  }
+
+  setFloorList() {
+    this.setRosterList();
   }
 }

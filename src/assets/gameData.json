@@ -115,6 +115,10 @@
             "LastName": "Davidson"
         }
     ],
+    "HomeRosterOnFloor": [
+    ],
+    "VisitorRosterOnFloor": [
+    ],
     "StatItems" : [
     ]
 

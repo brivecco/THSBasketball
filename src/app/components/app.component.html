@@ -9,7 +9,7 @@
    <app-player-list [game]="game" [rosterType]="'visitor'" (selectPlayer)="playerSelected($event)"></app-player-list>
   </div>
   <div class="flex-center">
-   <app-stat-actions [game]="game" [currentPlayer]="currentPlayer" (action)="actionAdded()"></app-stat-actions>
+   <app-stat-actions [game]="game" [currentPlayer]="currentPlayer" (action)="actionPerformed($event)"></app-stat-actions>
   </div>
   <div class="flex-right-edge">
     <app-statitem-list #statItemPanel [game]="game" (selectStatitem)="showStatItem($event)"

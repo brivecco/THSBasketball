@@ -3,6 +3,7 @@ import { Game } from '../models/game';
 import { School } from '../models/school';
 import { Player } from '../models/player';
 import { StatItem } from '../models/statitem';
+import { GameAction } from '../models/gameAction';
 
 import {map} from 'rxjs/operators';  
 import { HttpClient } from '@angular/common/http';
@@ -55,7 +56,9 @@ export class AppComponent {
   public showStatItem(statItem:StatItem) {
   }
 
-  public actionAdded(){
+  public actionPerformed(action:GameAction){
+    debugger;
+    if (action.IsStatAction)
     this.statItemPanel.updateItems();
   }
 }

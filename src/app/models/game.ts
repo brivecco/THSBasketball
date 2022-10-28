@@ -8,6 +8,8 @@ export class Game {
     public VisitorSchool:School | undefined;
     public HomeRoster: Player[];
     public VisitorRoster: Player[];
+    public HomeRosterOnFloor:Player[];
+    public VisitorRosterOnFloor:Player[];
     public StatItems:StatItem[];
 
 }

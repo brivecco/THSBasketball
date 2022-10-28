@@ -3,7 +3,8 @@ import { Game } from '../models/game';
 import { School } from '../models/school';
 import { Player } from '../models/player';
 import { StatItem } from '../models/statitem';
-
+import { GameAction } from '../models/gameAction';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -14,22 +15,49 @@ import { StatItem } from '../models/statitem';
 export class StatActionsComponent  {
   @Input() game:Game;
   @Input() currentPlayer:Player;
-  @Output() action:EventEmitter<void>=new EventEmitter<void>();
+  @Output() action:EventEmitter<GameAction>=new EventEmitter<GameAction>();
 
-  constructor() { }
+  closeResult:string  = '';
 
-  public registerAction(action:string) {
+  constructor(private modalService: NgbModal) { }
 
+  public registerStat(statName:string) {
+    this.registerAction(new GameAction(statName),true);
+  }
+  public registerAction(action:GameAction,isStat:boolean) {
+
+    // All actions have to have a current player context
     if (this.currentPlayer){
-      let item:StatItem=new StatItem();
+      if (isStat){}
+        this.game.StatItems.push(this.createStat(action.ActionName));
+      this.action.emit(action);
+    }
+  }
+
+  private createStat(action:string):StatItem {
+    let item:StatItem=new StatItem();
       item.PlayerId=this.currentPlayer.PlayerId;
       item.PlayerName=this.currentPlayer.FullName;
       item.StatCode=action;
       item.SchoolId=this.currentPlayer.SchoolId;
       item.Period="1";
-      this.game.StatItems.push(item);
-      this.action.emit();
-    }
+      return item;
   }
+
+  public subPlayerSelected(player:Player) {
+
+    this.registerAction(new GameAction("playersub",player),false);
+  }
+
+  open(content:any) {
+		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+			(result) => {
+				this.closeResult = `Closed with: ${result}`;
+			},
+			(reason) => {
+				this.closeResult = `yapper`;
+			},
+		);
+	}
 
 }

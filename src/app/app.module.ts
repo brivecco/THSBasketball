@@ -8,15 +8,17 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
 import { PlayerListComponent } from './components/player-list.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { StatActionsComponent } from './components/stat-actions.component';
 import { StatItemListComponent } from './components/statitem-list.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayerListComponent,
     StatActionsComponent,
-    StatItemListComponent
+    StatItemListComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +26,9 @@ import { StatItemListComponent } from './components/statitem-list.component';
     HttpClientModule,
     MatSliderModule,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCheckboxModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
