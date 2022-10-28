@@ -1,7 +1,9 @@
 import { Component, Input, Output,EventEmitter, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { Game } from 'src/app/models/game';
 import { Player } from 'src/app/models/player';
 import { StatItem } from 'src/app/models/statitem';
+import { GameService } from 'src/app/services/game.service';
 
 
 @Component({
@@ -9,34 +11,27 @@ import { StatItem } from 'src/app/models/statitem';
   templateUrl: './statitem-list.component.html',
   styleUrls: ['./statitem-list.component.css']
 })
-export class StatItemListComponent implements OnInit {
-  @Input() game: Game;
+export class StatItemListComponent {
   @Input() currentPlayer: Player;
   @Output() selectStatitem:EventEmitter<StatItem>=new EventEmitter<StatItem>();
 
   rosterType:string="all";
   displayedColumns: string[] = ['Description'];
-  statItems:StatItem[];
+  statItems$:Observable<StatItem[]> = this.gameService.currentGame$.pipe(
+    map(game => this.filterByType(game))
+  );
 
-  constructor() { }
+  constructor(private gameService: GameService) { }
 
-  ngOnInit(): void {
-  this.updateItems();
-  }
 
-updateItems() {
-
-  debugger;
+  filterByType(game: Game) : StatItem[] {
   switch(this.rosterType) {
     case "home":
-      this.statItems=this.game.StatItems.filter(si=>si.SchoolId===this.game.HomeSchool.SchoolId);
-      break;
+      return game.StatItems.filter(si=>si.SchoolId===game.HomeSchool.SchoolId);
       case "visitor":
-        this.statItems=this.game.StatItems.filter(si=>si.SchoolId===this.game.VisitorSchool.SchoolId);
-        break;
+        return game.StatItems.filter(si=>si.SchoolId===game.VisitorSchool.SchoolId);
       default:
-        this.statItems=[...this.game.StatItems];
-        break;
+        return game.StatItems;
   }
   
 }

@@ -5,6 +5,7 @@ import { Game } from 'src/app/models/game';
 import { GameAction } from 'src/app/models/gameAction';
 import { Player } from 'src/app/models/player';
 import { StatItem } from 'src/app/models/statitem';
+import { GameService } from 'src/app/services/game.service';
 
 
 @Component({
@@ -15,22 +16,22 @@ import { StatItem } from 'src/app/models/statitem';
 export class StatActionsComponent  {
   @Input() game:Game;
   @Input() currentPlayer:Player;
-  @Output() action:EventEmitter<GameAction>=new EventEmitter<GameAction>();
 
   closeResult:string  = '';
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private gameService: GameService) { }
 
   public registerStat(statName:string) {
     this.registerAction(new GameAction(statName),true);
   }
   public registerAction(action:GameAction,isStat:boolean) {
-
     // All actions have to have a current player context
     if (this.currentPlayer){
-      if (isStat){}
+      if (isStat){
         this.game.StatItems.push(this.createStat(action.ActionName));
-      this.action.emit(action);
+      }
+
+      this.gameService.updateGame(this.game);
     }
   }
 

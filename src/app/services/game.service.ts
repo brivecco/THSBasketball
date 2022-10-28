@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, merge, Observable, shareReplay, Subject } from 'rxjs';
 import { Game } from '../models/game';
 import { Player } from '../models/player';
 import { StatItem } from '../models/statitem';
@@ -9,12 +9,13 @@ import { StatItem } from '../models/statitem';
   providedIn: 'root'
 })
 export class GameService {
-
-  public currentGame$: Observable<Game> = this.GetGameData();
-
+  public updateGame$: Subject<Game> = new Subject<Game>();
+  public currentGame$: Observable<Game> = merge(this.getGameData(), this.updateGame$).pipe(shareReplay(1));
+  
+  
   constructor(private h:HttpClient) { }
 
-  private GetGameData() : Observable<Game> {
+  private getGameData() : Observable<Game> {
     return this.h.get<Game>("assets/gameData.json")
     .pipe(map(g=>
       ({...g, 
@@ -23,5 +24,9 @@ export class GameService {
         StatItems: g.StatItems.map(si=>Object.assign(new StatItem(),si))
        })
     ));  
+  }
+
+  public updateGame(game: Game){
+    this.updateGame$.next(game);
   }
 }

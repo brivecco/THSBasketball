@@ -2,7 +2,6 @@
     game: game$ | async
   } as observables">
   
-  
   <div class="top-flex-container">
     <div class="flex-left-edge">{{observables.game.VisitorSchool?.Name}}</div>
     <div class="flex-center">middle</div>
@@ -14,10 +13,10 @@
      <app-player-list [game]="observables.game" [rosterType]="'visitor'" (selectPlayer)="playerSelected($event)"></app-player-list>
     </div>
     <div class="flex-center">
-     <app-stat-actions [game]="observables.game" [currentPlayer]="currentPlayer" (action)="actionPerformed($event)"></app-stat-actions>
+     <app-stat-actions [game]="observables.game" [currentPlayer]="currentPlayer" ></app-stat-actions>
     </div>
     <div class="flex-right-edge">
-      <app-statitem-list #statItemPanel [game]="observables.game" (selectStatitem)="showStatItem($event)"
+      <app-statitem-list (selectStatitem)="showStatItem($event)"
       [currentPlayer]="currentPlayer"></app-statitem-list>
     </div>
   </div>

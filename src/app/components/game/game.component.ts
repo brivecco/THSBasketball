@@ -16,8 +16,6 @@ import { StatItemListComponent } from '../statitem-list/statitem-list.component'
 })
 export class GameComponent {
 
-  @ViewChild("statItemPanel") statItemPanel:StatItemListComponent;
-  
   public schools : School[] = [
     {SchoolId:"tv1",Name:"Taylorville",Nickname:"Tornadoes"},
     {SchoolId:"mtz1",Name:"Mount Zion",Nickname:"Braves"}
@@ -38,10 +36,5 @@ export class GameComponent {
   public showStatItem(statItem:StatItem) {
   }
 
-  public actionPerformed(action:GameAction){
-    debugger;
-    if (action.IsStatAction)
-    this.statItemPanel.updateItems();
-  }
 
 }
