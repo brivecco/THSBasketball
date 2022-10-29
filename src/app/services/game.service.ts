@@ -12,7 +12,6 @@ export class GameService {
   public updateGame$: Subject<Game> = new Subject<Game>();
   public currentGame$: Observable<Game> = merge(this.getGameData(), this.updateGame$).pipe(shareReplay(1));
   
-  
   constructor(private h:HttpClient) { }
 
   private getGameData() : Observable<Game> {

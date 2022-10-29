@@ -18,10 +18,13 @@ export class PlayerListComponent {
   displayedColumns: string[] = ['FullName',"Actions"];
 
   onTheFloorOnly$: BehaviorSubject<boolean>= new BehaviorSubject<boolean>(false);
-  roster$: Observable<Player[]> =  combineLatest([this.gameService.currentGame$.pipe(
+
+  playerList$: Observable<Player[]> = this.gameService.currentGame$.pipe(
     map(game => this.filterRosterList(game)),
     map(list => list.sort((a, b) => Number(b.OnFloor) - Number(a.OnFloor)))
-  ), this.onTheFloorOnly$]).pipe(
+  );
+
+  roster$: Observable<Player[]> =  combineLatest([this.playerList$, this.onTheFloorOnly$]).pipe(
     map(([players, onFloor]) => onFloor ? players.filter(p=> p.OnFloor) : players )
   );
 
