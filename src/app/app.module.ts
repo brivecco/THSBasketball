@@ -18,6 +18,10 @@ import { PlayerSubComponent } from './components/player-sub/player-sub.component
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { environment } from 'src/environments/environment';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
@@ -38,9 +42,13 @@ import {MatCardModule} from '@angular/material/card';
     MatButtonModule,
     MatCheckboxModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

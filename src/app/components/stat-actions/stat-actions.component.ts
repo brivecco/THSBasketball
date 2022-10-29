@@ -31,6 +31,7 @@ export class StatActionsComponent  {
     // All actions have to have a current player context
     if (this.currentPlayer){
       if (isStat){
+        this.game.StatItems = this.game.StatItems ? this.game.StatItems : [];
         this.game.StatItems.push(this.createStat(action.ActionName, action.ActionPlayer));
       }
 

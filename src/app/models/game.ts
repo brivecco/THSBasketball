@@ -11,5 +11,6 @@ export class Game {
     public HomeRosterOnFloor:Player[];
     public VisitorRosterOnFloor:Player[];
     public StatItems:StatItem[];
+    public key: string;
 
 }
