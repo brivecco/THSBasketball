@@ -19,7 +19,7 @@ export class StatActionsComponent  {
 
   closeResult:string  = '';
 
-  constructor(private modalService: NgbModal) { }
+  constructor() { }
 
   public registerStat(statName:string) {
     this.registerAction(new GameAction(statName),true);
@@ -49,15 +49,5 @@ export class StatActionsComponent  {
     this.registerAction(new GameAction("playersub",player),false);
   }
 
-  open(content:any) {
-		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
-			(result) => {
-				this.closeResult = `Closed with: ${result}`;
-			},
-			(reason) => {
-				this.closeResult = `yapper`;
-			},
-		);
-	}
-
+  
 }

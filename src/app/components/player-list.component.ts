@@ -39,6 +39,9 @@ export class PlayerListComponent implements OnInit {
           this.roster=[...this.game.HomeRoster,...this.game.VisitorRoster];
           break;
   }
+  debugger;
+  if (this.onTheFloorOnly)
+      this.roster=this.roster.filter(p=>p.OnFloor);
 }
   selectRow(player:Player,rowIndex:number) {
     this.selectedRowIndex=rowIndex;
