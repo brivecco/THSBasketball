@@ -1,26 +1,25 @@
-<div class="table-container">
-    <table mat-table [dataSource]="statItems" class="mat-elevation-z8">
-    
-        <!--- Note that these columns can be defined in any order.
+<table mat-table [dataSource]="statItems" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
-      
-        <!-- Position Column -->
-        <ng-container matColumnDef="Description">
-          <th mat-header-cell *matHeaderCellDef>Action</th>
-          <td mat-cell *matCellDef="let element"> {{element.Description}} </td>
-        </ng-container>
-      
-        <ng-container matColumnDef="Edit">
-          <th mat-header-cell *matHeaderCellDef>Edit2</th>
-          <td mat-cell *matCellDef="let element"> <button mat-button (click)="editStatItem(element)">Edit</button> </td>
-        </ng-container>
 
-        <ng-container matColumnDef="Delete">
-          <th mat-header-cell *matHeaderCellDef>Delete3</th>
-          <td mat-cell *matCellDef="let element"> <button mat-button (click)="deleteStatItem(element)">Delete</button> </td>
-        </ng-container>
+  <!-- Position Column -->
+  <ng-container matColumnDef="Description">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element"> {{element.Description}} </td>
+  </ng-container>
 
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-      </div>
-      <button (click)="clearAll()">Clear</button>"
+  <ng-container matColumnDef="Edit">
+    <th mat-header-cell *matHeaderCellDef>Edit2</th>
+    <td mat-cell *matCellDef="let element"> <button mat-button (click)="editStatItem(element)">Edit</button> </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Delete">
+    <th mat-header-cell *matHeaderCellDef>Delete3</th>
+    <td mat-cell *matCellDef="let element"> <button mat-button (click)="deleteStatItem(element)">Delete</button> </td>
+  </ng-container>
+
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<button (click)="clearAll()">Clear</button>"

@@ -1,15 +1,15 @@
 export class StatItem {
-    public SchoolId:string;
-    public PlayerId:string;
-    public PlayerName:string;
-    public StatCode:string;
-    public Period:string;
-    
-    public get Description():string{
+    public SchoolId: string;
+    public PlayerId: string;
+    public PlayerName: string;
+    public StatCode: string;
+    public Period: string;
+
+    public get Description(): string {
         return `${this.PlayerName} ${this.StatEnding()}`
     }
 
-    public StatEnding():string {
+    public StatEnding(): string {
 
         switch (this.StatCode) {
             case "2P":
@@ -32,6 +32,19 @@ export class StatItem {
                 return " got an assist";
             default:
                 return "Unknown Action!!";
+        }
+    }
+
+    public Score(): number {
+        switch (this.StatCode) {
+            case "2P":
+                return 2;
+            case "3P":
+                return 3;
+            case "FT":
+                return 1;
+            default:
+                return 0;
         }
     }
 }

@@ -1,16 +1,5 @@
-.table-container{
-    min-height: 250px ;
-    max-height: 500px ;
-    overflow: auto ;
-    width:100%;
+.playerTable {
+  background:skyblue;
+  display:block;margin-right:10px
 
-  }
-
-table {
-  width:100%
 }
-
-.mat-row:hover {
-  background-color: tan;
-}
-

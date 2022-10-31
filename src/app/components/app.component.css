@@ -5,7 +5,8 @@
     height:10vh;
     margin:0;
     padding-right:10px;
-  }
+    background-color:#d9bfe4;
+}
 
   .bottom-flex-container {
     display:flex;
@@ -14,20 +15,17 @@
     height:90vh;
     margin:0;
     padding-right:10px;
+    background-color:ivory;
   }
 
   .flex-left-edge {
-    flex:1;
-    background-color:dodgerblue;
+    flex:1;background:yellow;
   }
 
   .flex-right-edge {
     flex:1;
     text-align:right;
-    background-color:dodgerblue;
   }
-
-
   
   .flex-center {
     flex:2;
@@ -35,9 +33,16 @@
 
   .player-flex-container {
     display:flex;
-    max-width:50%;
     height:100%;
     margin:0;
   }
 
+  .top-score {
+    font-weight:bold;
+    font-size:24px;
+    height:100%;
+    padding-top:2vh;
+    margin-left:10px;
+    margin-right:10px;
+  }
   

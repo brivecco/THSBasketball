@@ -1,7 +1,11 @@
 <div class="top-flex-container">
-  <div class="flex-left-edge">{{game.VisitorSchool?.Name}}</div>
+  <div class="flex-left-edge">
+    <div class="top-score">{{game.VisitorSchool?.Name}} {{game.VisitorScore}}</div>
+  </div>
   <div class="flex-center">middle</div>
-  <div class="flex-right-edge">{{game.VisitorSchool?.Name}}</div>
+  <div class="flex-right-edge">
+    <div class="top-score">{{game.HomeSchool?.Name}} {{game.HomeScore}}</div>
+  </div>
 </div>
 <div class="bottom-flex-container">
   <div class="flex-left-edge">
