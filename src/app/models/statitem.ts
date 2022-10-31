@@ -12,14 +12,24 @@ export class StatItem {
     public StatEnding():string {
 
         switch (this.StatCode) {
-            case "2PM":
+            case "2P":
                 return " made a 2-pointer";
-            case "2PF":
+            case "2PM":
                 return " missed a 2-pointer";
-            case "3PM":
+            case "3P":
                 return " made a 3-pointer";
-            case "3PF":
+            case "3PM":
                 return " missed a 3-pointer";
+            case "FT":
+                return " made a free throw";
+            case "FTM":
+                return " missed a freethrow";
+            case "DREB":
+                return " got a defensive rebound";
+            case "OREB":
+                return " got an offensive rebound";
+            case "ASS":
+                return " got an assist";
             default:
                 return "Unknown Action!!";
         }

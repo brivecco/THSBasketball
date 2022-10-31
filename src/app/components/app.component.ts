@@ -10,6 +10,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AnimationPlayer } from '@angular/animations';
 import { StatItemListComponent } from './statitem-list.component';
+import { PlayerListComponent } from './player-list.component';
+import {GameService} from '../services/game.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,8 @@ import { StatItemListComponent } from './statitem-list.component';
 })
 export class AppComponent {
   @ViewChild("statItemPanel") statItemPanel:StatItemListComponent;
+  @ViewChild("homeList") homeList:PlayerListComponent;
+  @ViewChild("visitorList") visitorList:PlayerListComponent;
 
   title = 'THSBasketball';
 
@@ -29,13 +33,15 @@ export class AppComponent {
   
   public game:Game=null;
   public currentPlayer:Player=null;
+  public gameMode:string;
 
-  constructor(http:HttpClient) {
+  constructor(http:HttpClient,svc:GameService) {
    
     //this.game=new Game();
     //this.game.HomeSchool= this.schools.find(s=>s.SchoolId==="tv1");
     //this.game.VisitorSchool= this.schools.find(s=>s.SchoolId==="mtz1");
     this.setGameData(http);
+    this.gameMode="STAT";
   }
 
   private setGameData(h:HttpClient) {
@@ -57,8 +63,18 @@ export class AppComponent {
   }
 
   public actionPerformed(action:GameAction){
-    debugger;
-    if (action.IsStatAction)
-    this.statItemPanel.updateItems();
+
+    this.gameMode="STAT";
+
+    if (action.IsStatAction ) {
+      this.statItemPanel.updateItems();
+    }
+    else if (action.ActionName==="SUB") {
+      this.currentPlayer.OnFloor=!this.currentPlayer.OnFloor;
+      if (this.currentPlayer.SchoolId===this.game.HomeSchool.SchoolId)
+        this.homeList.sortRoster();
+      else
+      this.visitorList.sortRoster();
+    }
   }
 }

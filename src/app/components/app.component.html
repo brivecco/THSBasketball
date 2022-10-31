@@ -5,8 +5,11 @@
 </div>
 <div class="bottom-flex-container">
   <div class="flex-left-edge">
-    <app-player-list [game]="game" [rosterType]="'home'" (selectPlayer)="playerSelected($event)"></app-player-list>
-   <app-player-list [game]="game" [rosterType]="'visitor'" (selectPlayer)="playerSelected($event)"></app-player-list>
+    <div class="player-flex-container">
+    <app-player-list #homeList [game]="game" [rosterType]="'home'"  (selectPlayer)="playerSelected($event)" [gameMode]="gameMode">
+    </app-player-list>
+   <app-player-list #visitorList [game]="game" [rosterType]="'visitor'" (selectPlayer)="playerSelected($event)"></app-player-list>
+  </div>
   </div>
   <div class="flex-center">
    <app-stat-actions [game]="game" [currentPlayer]="currentPlayer" (action)="actionPerformed($event)"></app-stat-actions>

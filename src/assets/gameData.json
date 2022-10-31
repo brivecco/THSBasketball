@@ -15,6 +15,7 @@
             "PlayerId": "TV1",
             "FirstName": "Drake",
             "LastName": "Howard",
+            "Jersey": "44",
             "OnFloor": true
         },
         {
@@ -22,6 +23,7 @@
             "PlayerId": "TV2",
             "FirstName": "Will",
             "LastName": "Turvey",
+            "Jersey": "12",
             "OnFloor": true
         },
         {
@@ -29,6 +31,7 @@
             "PlayerId": "TV3",
             "FirstName": "Will",
             "LastName": "Bitschenauer",
+            "Jersey": "23",
             "OnFloor": false
         },
         {
@@ -36,6 +39,7 @@
             "PlayerId": "TV4",
             "FirstName": "Clark",
             "LastName": "Durbin",
+            "Jersey": "7",
             "OnFloor": false
         },
         {
@@ -43,6 +47,7 @@
             "PlayerId": "TV5",
             "FirstName": "Tharyn",
             "LastName": "Wiseman",
+            "Jersey": "21",
             "OnFloor": false
         }, 
         {
@@ -50,6 +55,7 @@
             "PlayerId": "TV6",
             "FirstName": "Cade",
             "LastName": "Beckmeir",
+            "Jersey": "9",
             "OnFloor": false
         },
         {
@@ -57,6 +63,7 @@
             "PlayerId": "TV7",
             "FirstName": "Miles",
             "LastName": "Clayton",
+            "Jersey": "35",
             "OnFloor": false
         },
         {
@@ -64,6 +71,7 @@
             "PlayerId": "TV8",
             "FirstName": "Cash",
             "LastName": "Foraker",
+            "Jersey": "20",
             "OnFloor": false
         },
         {
@@ -71,6 +79,7 @@
             "PlayerId": "TV9",
             "FirstName": "Baron",
             "LastName": "Odam",
+            "Jersey": "11",
             "OnFloor": false
         },
         {
@@ -78,6 +87,7 @@
             "PlayerId": "TV10",
             "FirstName": "Seth",
             "LastName": "Hughes",
+            "Jersey": "46",
             "OnFloor": false
         },
         {
@@ -85,6 +95,7 @@
             "PlayerId": "TV11",
             "FirstName": "Matthew",
             "LastName": "Geddings",
+            "Jersey": "18",
             "OnFloor": false
         },
         {
@@ -92,6 +103,31 @@
             "PlayerId": "TV12",
             "FirstName": "Kaden",
             "LastName": "Turpac",
+            "Jersey": "29",
+            "OnFloor": false
+        },
+        {
+            "SchoolId": "TVL",
+            "PlayerId": "TV12",
+            "FirstName": "Kaden",
+            "LastName": "Turpac",
+            "Jersey": "29",
+            "OnFloor": false
+        },
+        {
+            "SchoolId": "TVL",
+            "PlayerId": "TV12",
+            "FirstName": "Kaden",
+            "LastName": "Turpac",
+            "Jersey": "29",
+            "OnFloor": false
+        },
+        {
+            "SchoolId": "TVL",
+            "PlayerId": "TV12",
+            "FirstName": "Kaden",
+            "LastName": "Turpac",
+            "Jersey": "29",
             "OnFloor": false
         }
     ],
@@ -102,12 +138,14 @@
             "PlayerId": "MT1",
             "FirstName": "John",
             "LastName": "Wall",
+            "Jersey": "11",
             "OnFloor": true
         },
         { "SchoolId": "MHS",
             "PlayerId": "MT2",
             "FirstName": "Al",
             "LastName": "Harrington",
+            "Jersey": "20",
             "OnFloor": false
         },
         {
@@ -115,6 +153,7 @@
             "PlayerId": "MT3",
             "FirstName": "Charles",
             "LastName": "Pinkney",
+            "Jersey": "41",
             "OnFloor": false
         },
         {
@@ -122,6 +161,7 @@
             "PlayerId": "MT4",
             "FirstName": "Damian",
             "LastName": "Lillard",
+            "Jersey": "5",
             "OnFloor": false
         },
         {
@@ -129,6 +169,7 @@
             "PlayerId": "MT5",
             "FirstName": "Miles",
             "LastName": "Davidson",
+            "Jersey": "30",
             "OnFloor": false
         }
     ],

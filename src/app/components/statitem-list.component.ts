@@ -26,7 +26,6 @@ export class StatItemListComponent implements OnInit {
 
 updateItems() {
 
-  debugger;
   switch(this.rosterType) {
     case "home":
       this.statItems=this.game.StatItems.filter(si=>si.SchoolId===this.game.HomeSchool.SchoolId);

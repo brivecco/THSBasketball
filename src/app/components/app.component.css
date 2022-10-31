@@ -33,4 +33,11 @@
     flex:2;
   }
 
+  .player-flex-container {
+    display:flex;
+    max-width:50%;
+    height:100%;
+    margin:0;
+  }
+
   

@@ -2,6 +2,7 @@ import { Component, Input, Output,EventEmitter, OnInit } from '@angular/core';
 import { Game } from '../models/game';
 import { School } from '../models/school';
 import { Player } from '../models/player';
+import { ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 
 @Component({
   selector: 'app-player-list',
@@ -10,13 +11,13 @@ import { Player } from '../models/player';
 })
 export class PlayerListComponent implements OnInit {
   @Input() game: Game;
+  @Input() gameMode:string;
   @Input() rosterType:string;
+  
   @Output() selectPlayer:EventEmitter<Player>=new EventEmitter<Player>();
 
-  displayedColumns: string[] = ['FullName',"Actions"];
+  displayedColumns: string[] = ['FullName'];
   roster:Player[];
-  selectedRowIndex:number=-1;
-  onTheFloorOnly:boolean=true;
 
   constructor() { }
 
@@ -39,20 +40,24 @@ export class PlayerListComponent implements OnInit {
           this.roster=[...this.game.HomeRoster,...this.game.VisitorRoster];
           break;
   }
-  debugger;
-  if (this.onTheFloorOnly)
-      this.roster=this.roster.filter(p=>p.OnFloor);
+
+  this.sortRoster();
 }
-  selectRow(player:Player,rowIndex:number) {
-    this.selectedRowIndex=rowIndex;
+
+sortRoster() {
+  this.roster.sort((a,b)=>{
+    if (a.OnFloor===b.OnFloor)
+      return a.Jersey-b.Jersey;
+    else
+      return a.OnFloor ? -1 : 1;
+  }
+    );
+  this.roster=[...this.roster];
+}
+
+  selectRow(player:Player) {
     this.selectPlayer.emit(player);
   }
 
-  buttonClick(e:any) {
-    e.stopPropagation();
-  }
 
-  setFloorList() {
-    this.setRosterList();
-  }
 }

@@ -1,7 +1,13 @@
 <div class="infoHeader">{{this.currentPlayer ? this.currentPlayer.FullName : "(Select Player)"}}</div>
 <div class="flex-container-stat">
-    <button mat-raised-button class="flex-stat" (click)="registerStat('2PM')">2 Pt+</button>
-    <button mat-raised-button class="flex-stat" (click)="registerStat('2PF')">2 Pt-</button>
-    <button mat-raised-button class="flex-stat" (click)="registerStat('3PM')">3 Pt+</button>
-    <button mat-raised-button class="flex-stat" (click)="registerStat('3PF')">3 Pt-</button>
+    <button mat-raised-button class="flex-stat" (click)="registerStat('FT')">FT</button>
+    <button mat-raised-button class="flex-stat" (click)="registerStat('2P')">2 Pt</button>
+    <button mat-raised-button class="flex-stat" (click)="registerStat('3P')">3 Pt</button>
+    <button mat-raised-button class="flex-stat" (click)="registerStat('DREB')">Def Rebound</button>
+    <button mat-raised-button class="flex-stat" (click)="registerStat('FTM')">FT M</button>
+    <button mat-raised-button class="flex-stat" (click)="registerStat('2PM')">2 Pt M</button>
+    <button mat-raised-button class="flex-stat" (click)="registerStat('3PM')">3 PT M</button>
+    <button mat-raised-button class="flex-stat" (click)="registerStat('OREB')">Off Rebound</button>
+    <button mat-raised-button class="flex-stat" (click)="registerStat('ASS')">Assist</button>
+    <button mat-raised-button class="flex-stat" (click)="registerStat('SUB')">{{currentPlayer.OnFloor ? 'Sub Out' : 'Sub In'}}</button>
   </div>

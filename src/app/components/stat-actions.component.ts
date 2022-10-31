@@ -17,20 +17,22 @@ export class StatActionsComponent  {
   @Input() currentPlayer:Player;
   @Output() action:EventEmitter<GameAction>=new EventEmitter<GameAction>();
 
-  closeResult:string  = '';
+  closeResult:string  = "";
 
   constructor() { }
 
   public registerStat(statName:string) {
-    this.registerAction(new GameAction(statName),true);
+    this.registerAction(new GameAction(statName));
   }
-  public registerAction(action:GameAction,isStat:boolean) {
+  public registerAction(action:GameAction) {
 
     // All actions have to have a current player context
     if (this.currentPlayer){
-      if (isStat){}
+
+      if (action.IsStatAction){}
         this.game.StatItems.push(this.createStat(action.ActionName));
-      this.action.emit(action);
+
+        this.action.emit(action);
     }
   }
 
@@ -46,7 +48,7 @@ export class StatActionsComponent  {
 
   public subPlayerSelected(player:Player) {
 
-    this.registerAction(new GameAction("playersub",player),false);
+    this.registerAction(new GameAction("playersub",player));
   }
 
   

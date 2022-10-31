@@ -8,7 +8,7 @@
   }
 
   .flex-stat {
-    width:25%;
+    width:20%;
     margin: 10px;
     padding: 20px;
     font-size: 20px;
@@ -21,3 +21,7 @@
     font-weight:bold;
   }
   
+ button {
+    color:purple;
+    white-space: normal;
+  }
