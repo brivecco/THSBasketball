@@ -30,18 +30,14 @@ export class AppComponent {
     {SchoolId:"mtz1",Name:"Mount Zion",Nickname:"Braves"}
   ]
     
-  
   public game:Game=null;
   public currentPlayer:Player=null;
-  public gameMode:string;
+  public currentStatItem:StatItem=null;
+  
+  constructor(http:HttpClient,private svc:GameService) {
 
-  constructor(http:HttpClient,svc:GameService) {
-   
-    //this.game=new Game();
-    //this.game.HomeSchool= this.schools.find(s=>s.SchoolId==="tv1");
-    //this.game.VisitorSchool= this.schools.find(s=>s.SchoolId==="mtz1");
     this.setGameData(http);
-    this.gameMode="STAT";
+    this.svc.GameMode=GameService.STATS_MODE;
   }
 
   private setGameData(h:HttpClient) {
@@ -56,15 +52,24 @@ export class AppComponent {
   }
 
   public playerSelected(player:Player) {
-    this.currentPlayer=player;
+
+    if (this.svc.GameMode===GameService.STATS_MODE)
+      this.currentPlayer=player;
+    else if (this.svc.GameMode===GameService.EDIT_STATITEM_MODE) {
+      this.currentStatItem.PlayerId=player.PlayerId;
+      this.currentStatItem.PlayerName=player.FullName;
+      this.svc.GameMode=GameService.STATS_MODE;
+    }
+
   }
 
-  public showStatItem(statItem:StatItem) {
+  public editStatItem(statItem:StatItem) {
+    this.currentStatItem=statItem;
   }
 
   public actionPerformed(action:GameAction){
 
-    this.gameMode="STAT";
+    if (this.svc.GameMode===GameService.STATS_MODE) {
 
     if (action.IsStatAction ) {
       this.statItemPanel.updateItems();
@@ -74,7 +79,13 @@ export class AppComponent {
       if (this.currentPlayer.SchoolId===this.game.HomeSchool.SchoolId)
         this.homeList.sortRoster();
       else
-      this.visitorList.sortRoster();
+        this.visitorList.sortRoster();
     }
+  }
+  else if (this.svc.GameMode=GameService.EDIT_STATITEM_MODE) {
+    this.currentStatItem.StatCode=action.ActionName;
+    this.svc.GameMode=GameService.STATS_MODE;
+  }
+
   }
 }

@@ -1,0 +1,6 @@
+table {
+    display:block;
+    height: 400px;
+    background-color:pink;
+    overflow-y: scroll;
+}

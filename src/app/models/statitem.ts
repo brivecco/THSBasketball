@@ -4,7 +4,7 @@ export class StatItem {
     public PlayerName:string;
     public StatCode:string;
     public Period:string;
-
+    
     public get Description():string{
         return `${this.PlayerName} ${this.StatEnding()}`
     }

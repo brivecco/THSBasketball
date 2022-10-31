@@ -3,6 +3,7 @@ import { Game } from '../models/game';
 import { School } from '../models/school';
 import { Player } from '../models/player';
 import { StatItem } from '../models/statitem';
+import {GameService} from '../services/game.service';
 
 @Component({
   selector: 'app-statitem-list',
@@ -12,13 +13,14 @@ import { StatItem } from '../models/statitem';
 export class StatItemListComponent implements OnInit {
   @Input() game: Game;
   @Input() currentPlayer: Player;
+
   @Output() selectStatitem:EventEmitter<StatItem>=new EventEmitter<StatItem>();
 
   rosterType:string="all";
-  displayedColumns: string[] = ['Description'];
+  displayedColumns: string[] = ['Description',"Edit","Delete"];
   statItems:StatItem[];
 
-  constructor() { }
+  constructor(private svc:GameService) { }
 
   ngOnInit(): void {
   this.updateItems();
@@ -40,7 +42,18 @@ updateItems() {
   
 }
 
-  selectRow(statItem:StatItem) {
+    deleteStatItem(statItem:StatItem) {
+    this.game.StatItems.splice(this.game.StatItems.indexOf(statItem),1);
+    this.updateItems();
+  }
+
+  editStatItem(statItem:StatItem) {
+    this.svc.GameMode=GameService.EDIT_STATITEM_MODE
     this.selectStatitem.emit(statItem);
+  }
+
+  clearAll() {
+    this.game.StatItems=[];
+    this.statItems=this.game.StatItems;
   }
 }

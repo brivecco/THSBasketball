@@ -4,6 +4,7 @@ import { School } from '../models/school';
 import { Player } from '../models/player';
 import { StatItem } from '../models/statitem';
 import { GameAction } from '../models/gameAction';
+import { GameService} from '../services/game.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -19,9 +20,10 @@ export class StatActionsComponent  {
 
   closeResult:string  = "";
 
-  constructor() { }
+  constructor(private svc:GameService) { }
 
   public registerStat(statName:string) {
+
     this.registerAction(new GameAction(statName));
   }
   public registerAction(action:GameAction) {
@@ -29,10 +31,10 @@ export class StatActionsComponent  {
     // All actions have to have a current player context
     if (this.currentPlayer){
 
-      if (action.IsStatAction){}
-        this.game.StatItems.push(this.createStat(action.ActionName));
-
-        this.action.emit(action);
+      if (action.IsStatAction && this.svc.GameMode===GameService.STATS_MODE){
+        this.game.StatItems.unshift(this.createStat(action.ActionName));
+      }
+      this.action.emit(action);
     }
   }
 
@@ -46,10 +48,4 @@ export class StatActionsComponent  {
       return item;
   }
 
-  public subPlayerSelected(player:Player) {
-
-    this.registerAction(new GameAction("playersub",player));
-  }
-
-  
 }

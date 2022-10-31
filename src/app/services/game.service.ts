@@ -4,8 +4,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class GameService {
-public GameModeBob:String;
+static readonly STATS_MODE:string="STATMODE";
+static readonly EDIT_STATITEM_MODE:string="EDITSIMODE";
+public GameMode:String;
   constructor() { 
-    this.GameModeBob="yella";
+    this.GameMode=GameService.STATS_MODE;
   }
 }

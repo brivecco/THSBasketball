@@ -6,7 +6,7 @@
 <div class="bottom-flex-container">
   <div class="flex-left-edge">
     <div class="player-flex-container">
-    <app-player-list #homeList [game]="game" [rosterType]="'home'"  (selectPlayer)="playerSelected($event)" [gameMode]="gameMode">
+    <app-player-list #homeList [game]="game" [rosterType]="'home'"  (selectPlayer)="playerSelected($event)">
     </app-player-list>
    <app-player-list #visitorList [game]="game" [rosterType]="'visitor'" (selectPlayer)="playerSelected($event)"></app-player-list>
   </div>
@@ -15,7 +15,7 @@
    <app-stat-actions [game]="game" [currentPlayer]="currentPlayer" (action)="actionPerformed($event)"></app-stat-actions>
   </div>
   <div class="flex-right-edge">
-    <app-statitem-list #statItemPanel [game]="game" (selectStatitem)="showStatItem($event)"
+    <app-statitem-list #statItemPanel [game]="game" (selectStatitem)="editStatItem($event)"
     [currentPlayer]="currentPlayer"></app-statitem-list>
   </div>
 </div>
