@@ -4,12 +4,12 @@ table {
     background-color:#9F73AB;
     overflow-y: scroll;
     margin-right:5px;
+    margin-top:15vh;
 }
 
  td {color:black;font-weight:bold;}
   
   button {
-    background:#221c35;
     color:white;
     margin:3px;
     padding:0px;
