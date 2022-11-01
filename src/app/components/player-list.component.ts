@@ -27,7 +27,17 @@ export class PlayerListComponent implements OnInit {
         
   }
 
+  public get rosterList():Player[] {
+    this.setRosterList();
+    return this.roster;
+  }
+
   setRosterList() {
+
+    if (!this.game || !this.game.HomeRoster) {
+      this.roster=[];
+      return;
+    }
 
     switch(this.rosterType) {
       case "home":

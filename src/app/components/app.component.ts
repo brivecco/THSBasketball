@@ -56,8 +56,10 @@ export class AppComponent {
 
   public playerSelected(player: Player) {
 
-    if (this.svc.GameMode === GameService.STATS_MODE)
+    if (this.svc.GameMode === GameService.STATS_MODE) {
       this.currentPlayer = player;
+      this.currentPlayer.updateStats(this.game);
+    }
     else if (this.svc.GameMode === GameService.EDIT_STATITEM_MODE) {
       this.currentStatItem.PlayerId = player.PlayerId;
       this.currentStatItem.PlayerName = player.FullName;
@@ -76,6 +78,7 @@ export class AppComponent {
 
       if (action.IsStatAction) {
         this.statItemPanel.updateItems();
+        this.currentPlayer?.updateStats(this.game);
       }
       else if (action.ActionName === "SUB") {
         this.currentPlayer.OnFloor = !this.currentPlayer.OnFloor;
