@@ -45,6 +45,7 @@ updateItems() {
     deleteStatItem(statItem:StatItem) {
     this.game.StatItems.splice(this.game.StatItems.indexOf(statItem),1);
     this.updateItems();
+    this.currentPlayer?.updateStats(this.game);
   }
 
   editStatItem(statItem:StatItem) {

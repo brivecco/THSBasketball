@@ -1,6 +1,17 @@
 table {
     display:block;
-    height: 80%;
-    background-color:pink;
+    height: 45vh;
+    background-color:#9F73AB;
     overflow-y: scroll;
+    margin-right:5px;
+    margin-top:15vh;
 }
+
+ td {color:black;font-weight:bold;}
+  
+  button {
+    color:white;
+    margin:3px;
+    padding:0px;
+    width:3px;
+  }

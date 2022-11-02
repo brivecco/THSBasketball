@@ -1,27 +1,26 @@
 <div class="top-flex-container">
   <div class="flex-left-edge">
-    <div class="top-score">{{game.VisitorSchool?.Name}} {{game.VisitorScore}}</div>
+    <div class="top-score">{{game?.HomeSchool?.Name}}&nbsp;&nbsp;&nbsp;&nbsp;{{game?.HomeScore}}</div>
   </div>
-  <div class="flex-center">middle</div>
+  <div class="flex-center"><div class="infoHeader">{{this.currentPlayer ? this.currentPlayer.StatLineDescription : ""}}</div></div>
   <div class="flex-right-edge">
-    <div class="top-score">{{game.HomeSchool?.Name}} {{game.HomeScore}}</div>
+    <div class="top-score">{{game?.VisitorSchool?.Name}}&nbsp;&nbsp;&nbsp;&nbsp;{{game?.VisitorScore}}</div>
   </div>
 </div>
 <div class="bottom-flex-container">
   <div class="flex-left-edge">
-    <div class="player-flex-container">
     <app-player-list #homeList [game]="game" [rosterType]="'home'"  (selectPlayer)="playerSelected($event)">
     </app-player-list>
-   
-  </div>
   </div>
   <div class="flex-center">
    <app-stat-actions [game]="game" [currentPlayer]="currentPlayer" (action)="actionPerformed($event)"></app-stat-actions>
+   <app-statitem-list #statItemPanel [game]="game" (selectStatitem)="editStatItem($event)"
+   [currentPlayer]="currentPlayer"></app-statitem-list>
   </div>
   <div class="flex-right-edge">
-    <div class="player-flex-container">
+    <div style="float:right">
     <app-player-list #visitorList [game]="game" [rosterType]="'visitor'" (selectPlayer)="playerSelected($event)"></app-player-list>
-    </div>
+  </div>
   </div>
 </div>
 
