@@ -8,15 +8,33 @@
   }
 
   .flex-stat {
-    width:20%;
+    width:15%;
     margin: 10px;
     padding: 20px;
     font-size: 20px;
   }
 
-  
- button {
-    color:purple;
-    max-width:6vw;
+
+  button {
+    background-color:rgb(77, 22, 129);
+    color:white;
+    max-width:10vw;
+  }
+ button.btn-goodStat {
+    background-color:forestgreen;
+    color:gold;
+    max-width:10vw;
+    text-align: center;
+  }
+
+  button.btn-badStat {
+    background-color:rgb(209, 46, 46);
+    color:gold;
+    text-align: center;
+  }
+
+  button.btn-other {
+    background-color:rgb(21, 32, 184);
+    color:gold;
     text-align: center;
   }

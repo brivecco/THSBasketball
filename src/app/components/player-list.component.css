@@ -1,14 +1,15 @@
 .playerTable {
+  display:table;
   background:#d58bdd;
   color:white;
-  display:block;
   margin-right:10px;
   border:2px solid #400D51;
   max-height:80vh;
   overflow:auto;
+  width:18vw;
 }
 
-tr {display:table}
+.onFloor {background:rgb(179, 185, 218)}
 
 td {color:black;font-weight:bold;padding:20px;}
 
