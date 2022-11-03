@@ -43,6 +43,10 @@
     margin-right:3px;
   }
   
+  .visitor-score {
+    color:rgb(58, 53, 26);
+  }
+
   .infoHeader {
     width:100%;
     padding-top:2vh;

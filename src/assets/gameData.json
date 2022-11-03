@@ -69,8 +69,8 @@
         {
             "SchoolId": "TVL",
             "PlayerId": "TV8",
-            "FirstName": "Cash",
-            "LastName": "Foraker",
+            "FirstName": "Dylan",
+            "LastName": "Thomas",
             "Jersey": "20",
             "OnFloor": false
         },
@@ -101,35 +101,12 @@
         {
             "SchoolId": "TVL",
             "PlayerId": "TV12",
-            "FirstName": "Kaden",
-            "LastName": "Turpac",
-            "Jersey": "29",
-            "OnFloor": false
-        },
-        {
-            "SchoolId": "TVL",
-            "PlayerId": "TV12",
-            "FirstName": "Kaden",
-            "LastName": "Turpac",
-            "Jersey": "29",
-            "OnFloor": false
-        },
-        {
-            "SchoolId": "TVL",
-            "PlayerId": "TV12",
-            "FirstName": "Kaden",
-            "LastName": "Turpac",
-            "Jersey": "29",
-            "OnFloor": false
-        },
-        {
-            "SchoolId": "TVL",
-            "PlayerId": "TV12",
-            "FirstName": "Kaden",
-            "LastName": "Turpac",
+            "FirstName": "Scott",
+            "LastName": "Adams",
             "Jersey": "29",
             "OnFloor": false
         }
+        
     ],
     "VisitorRoster": [
         {
@@ -170,6 +147,46 @@
             "FirstName": "Miles",
             "LastName": "Davidson",
             "Jersey": "30",
+            "OnFloor": false
+        },
+        {
+            "SchoolId": "MHS",
+            "PlayerId": "MT6",
+            "FirstName": "Jack",
+            "LastName": "Edwards",
+            "Jersey": "37",
+            "OnFloor": false
+        },
+        {
+            "SchoolId": "MHS",
+            "PlayerId": "MT7",
+            "FirstName": "Nick",
+            "LastName": "Franklin Angeliouons",
+            "Jersey": "18",
+            "OnFloor": false
+        },
+        {
+            "SchoolId": "MHS",
+            "PlayerId": "MT8",
+            "FirstName": "Leif",
+            "LastName": "Pieneman",
+            "Jersey": "28",
+            "OnFloor": false
+        },
+        {
+            "SchoolId": "MHS",
+            "PlayerId": "MT9",
+            "FirstName": "Oliver",
+            "LastName": "Norfolk",
+            "Jersey": "11",
+            "OnFloor": false
+        },
+        {
+            "SchoolId": "MHS",
+            "PlayerId": "MT10",
+            "FirstName": "Will",
+            "LastName": "Durbin",
+            "Jersey": "1",
             "OnFloor": false
         }
     ],
