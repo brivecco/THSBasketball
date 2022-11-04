@@ -28,8 +28,10 @@ export class StatItem {
                 return " got a defensive rebound";
             case "OREB":
                 return " got an offensive rebound";
-            case "ASS":
+            case "AST":
                 return " got an assist";
+            case "FOUL":
+                return " committed a foul";
             default:
                 return "Unknown Action!!";
         }

@@ -48,4 +48,8 @@ export class StatActionsComponent  {
       return item;
   }
 
+public get floorFull() :boolean {
+ return this.game?.TeamFloorFull(this.currentPlayer) && !this.currentPlayer?.OnFloor;
+}
+
 }

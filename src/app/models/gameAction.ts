@@ -7,7 +7,7 @@ export class GameAction {
     public ActionPlayer:Player;
     public ActionStatItem:StatItem;
 
-    private statActionNames:string[]=["FT","FTM","2P","2PM","3P","3PM","DREB","OREB","ASS"];
+    private statActionNames:string[]=["FT","FTM","2P","2PM","3P","3PM","DREB","OREB","AST","FOUL"];
 
     constructor(actionName:string,actionPlayer?:Player) {
         this.ActionName=actionName;
