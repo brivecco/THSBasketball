@@ -30,13 +30,14 @@ updateItems() {
 
   switch(this.rosterType) {
     case "home":
-      this.statItems=this.game.StatItems.filter(si=>si.SchoolId===this.game.HomeSchool.SchoolId);
+      this.statItems=this.game?.StatItems.filter(si=>si.SchoolId===this.game.HomeSchool.SchoolId);
       break;
       case "visitor":
-        this.statItems=this.game.StatItems.filter(si=>si.SchoolId===this.game.VisitorSchool.SchoolId);
+        this.statItems=this.game?.StatItems.filter(si=>si.SchoolId===this.game.VisitorSchool.SchoolId);
         break;
       default:
-        this.statItems=[...this.game.StatItems];
+        this.statItems=this.game?.StatItems ?? [];
+        this.statItems=[...this.statItems];
         break;
   }
   

@@ -20,4 +20,9 @@ export class Game {
         return this.StatItems.filter(si => si.SchoolId === this.VisitorSchool.SchoolId).reduce((a, b) => a + b.Score(), 0);
     }
 
+    public TeamFloorFull(player:Player) : boolean {
+        let roster:Player[]= player?.SchoolId==this.HomeSchool?.SchoolId ? this.HomeRoster :this.VisitorRoster ;
+        roster=roster?.filter(p=>p.OnFloor);
+        return roster?.length>=5;
+       }
 }
