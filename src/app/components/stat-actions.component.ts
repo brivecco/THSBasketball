@@ -7,6 +7,7 @@ import { GameAction } from '../models/gameAction';
 import { GameService } from '../services/game.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, onValue, set } from 'firebase/database';
 
 @Component({
   selector: 'app-stat-actions',
@@ -52,7 +53,7 @@ export class StatActionsComponent {
     return this.game?.TeamFloorFull(this.currentPlayer) && !this.currentPlayer?.OnFloor;
   }
 
-   public Save():void {
+   public save():void {
 
     const firebaseConfig = {
       apiKey: "AIzaSyBtPMWBnl2Aj6z-jN_7gqNopJfay3Zb9wI",
@@ -65,7 +66,23 @@ export class StatActionsComponent {
     };
 
     const app = initializeApp(firebaseConfig);
-    //const db = getDatabase(app);
+    const db = getDatabase(app);
+
+
+    //const ref1 = ref(db,"/players");
+    const ref1 = ref(db);
+
+    let data: any;
+    set(ref1,this.game)
+    alert("data is saved");
+
+    /*
+    onValue(ref1, (snapshot) => {
+      data = snapshot.val();
+      set(ref1,this.game);
+      alert("it was set3");
+    });
+    */
 
    }
 
