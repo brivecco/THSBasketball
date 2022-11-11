@@ -6,8 +6,6 @@ import { StatItem } from '../models/statitem';
 import { GameAction } from '../models/gameAction';
 import { GameService } from '../services/game.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, onValue, set } from 'firebase/database';
 
 @Component({
   selector: 'app-stat-actions',
@@ -53,37 +51,7 @@ export class StatActionsComponent {
     return this.game?.TeamFloorFull(this.currentPlayer) && !this.currentPlayer?.OnFloor;
   }
 
-   public save():void {
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyBtPMWBnl2Aj6z-jN_7gqNopJfay3Zb9wI",
-      authDomain: "thshooptest.firebaseapp.com",
-      databaseURL: "https://thshooptest-default-rtdb.firebaseio.com",
-      projectId: "thshooptest",
-      storageBucket: "thshooptest.appspot.com",
-      messagingSenderId: "767237819710",
-      appId: "1:767237819710:web:5baaac7425f83a0160306f"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-
-    //const ref1 = ref(db,"/players");
-    const ref1 = ref(db);
-
-    let data: any;
-    set(ref1,this.game)
-    alert("data is saved");
-
-    /*
-    onValue(ref1, (snapshot) => {
-      data = snapshot.val();
-      set(ref1,this.game);
-      alert("it was set3");
-    });
-    */
-
-   }
-
+  public test() {
+    alert(this.game?.StatItems[0].StatCode);
+  }
 }

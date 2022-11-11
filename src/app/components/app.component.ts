@@ -64,6 +64,7 @@ export class AppComponent {
       this.currentStatItem.PlayerId = player.PlayerId;
       this.currentStatItem.PlayerName = player.FullName;
       this.svc.GameMode = GameService.STATS_MODE;
+      this.currentPlayer.updateStats(this.game);
     }
 
   }
@@ -92,5 +93,7 @@ export class AppComponent {
       this.currentStatItem.StatCode = action.ActionName;
       this.svc.GameMode = GameService.STATS_MODE;
     }
+    this.currentPlayer?.updateStats(this.game);
+    this.svc?.SaveGame(this.game);
   }
 }
