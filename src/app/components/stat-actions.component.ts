@@ -52,6 +52,14 @@ export class StatActionsComponent {
   }
 
   public test() {
-    alert(this.game?.StatItems[0].StatCode);
+    const cmd=prompt("command?");
+    switch (cmd) {
+      case "reset":
+        this.game.StatItems=[];
+        this.action.emit(null);
+        break;
+      default:
+        break;
+    }
   }
 }

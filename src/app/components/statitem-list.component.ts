@@ -11,11 +11,12 @@ import { GameService } from '../services/game.service';
   styleUrls: ['./statitem-list.component.css']
 })
 export class StatItemListComponent implements OnInit {
-  @Input() game: Game;
+  //@Input() game: Game;
   @Input() currentPlayer: Player;
 
   @Output() selectStatitem: EventEmitter<StatItem> = new EventEmitter<StatItem>();
 
+  game:Game;
   rosterType: string = "all";
   displayedColumns: string[] = ['Description', "Edit", "Delete"];
   statItems: StatItem[];
@@ -25,10 +26,12 @@ isDeleting:boolean=false;
   constructor(private svc: GameService) { }
 
   ngOnInit(): void {
-    this.updateItems();
+    //this.updateItems();
   }
 
-  updateItems() {
+  updateItems(game:Game) {
+
+    this.game=game;
 
     switch (this.rosterType) {
       case "home":
@@ -51,10 +54,11 @@ isDeleting:boolean=false;
   }
 
   deleteStatItem() {
+    this.currentPlayer=this.game?.GetPlayer(this.selectedStatItem.PlayerId);
     this.game.StatItems.splice(this.game.StatItems.indexOf(this.selectedStatItem), 1);
-    this.updateItems();
+    this.updateItems(this.game);
     this.currentPlayer?.updateStats(this.game);
-    this.selectedStatItem=this.selectedStatItem;
+    this.selectedStatItem=null;
     this.svc.GameMode=GameService.STATS_MODE;
     this.isDeleting=false;
   }

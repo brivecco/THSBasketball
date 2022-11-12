@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Game } from '../models/game';
 import { School } from '../models/school';
 import { Player } from '../models/player';
@@ -23,7 +23,8 @@ export class AppComponent {
   @ViewChild("homeList") homeList: PlayerListComponent;
   @ViewChild("visitorList") visitorList: PlayerListComponent;
 
-  title = 'THSBasketball';
+  appVersion: string = "1.0.22";
+  title: string = 'THS Basketball v' + this.appVersion;
 
   public schools: School[] = [
     { SchoolId: "tv1", Name: "Taylorville", Nickname: "Tornadoes" },
@@ -36,11 +37,34 @@ export class AppComponent {
 
   constructor(http: HttpClient, private svc: GameService) {
 
-    this.setGameData(http);
+    //this.setGameData(http);
+
+  }
+
+  ngOnInit(): void {
+
     this.svc.GameMode = GameService.STATS_MODE;
+    let callback = (x: any) => {
+      this.game = x;
+      this.statItemPanel.updateItems(this.game);
+      this.svc.SyncSaveGame(this.game);
+    };
+    this.svc.LoadGame(callback);
+
+  }
+
+  public gameLoaded(newGame: Game) {
+    this.game = newGame;
   }
 
   private setGameData(h: HttpClient) {
+
+    //let myObj = {id:"43556A",age:366};
+    //localStorage.setItem('ravioli', JSON.stringify(myObj));
+    let x = localStorage.getItem("ravioli");
+    let localValues = JSON.parse(x);
+    alert(localValues.age * 2);
+
     let t: Observable<Game> = h.get<Game>("assets/gameData.json")
       .pipe(map(g => {
         g = Object.assign(new Game(), g);
@@ -50,7 +74,10 @@ export class AppComponent {
         return g
       }));
 
-    t.subscribe(q => { this.game = q; });
+    t.subscribe(q => {
+      this.game = q;
+      //this.svc.StartGame(this.game);
+    });
 
   }
 
@@ -75,11 +102,15 @@ export class AppComponent {
 
   public actionPerformed(action: GameAction) {
 
+    if (!action) {
+      this.statItemPanel.updateItems(this.game);
+      return;
+    }
+
     if (this.svc.GameMode === GameService.STATS_MODE) {
 
       if (action.IsStatAction) {
-        this.statItemPanel.updateItems();
-        this.currentPlayer?.updateStats(this.game);
+        this.statItemPanel.updateItems(this.game);
       }
       else if (action.ActionName === "SUB") {
         this.currentPlayer.OnFloor = !this.currentPlayer.OnFloor;
@@ -94,6 +125,5 @@ export class AppComponent {
       this.svc.GameMode = GameService.STATS_MODE;
     }
     this.currentPlayer?.updateStats(this.game);
-    this.svc?.SaveGame(this.game);
   }
 }

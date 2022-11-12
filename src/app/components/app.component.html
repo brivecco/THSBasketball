@@ -16,11 +16,12 @@
   <div class="flex-left-edge">
     <app-player-list #homeList [game]="game" [rosterType]="'home'" (selectPlayer)="playerSelected($event)">
     </app-player-list>
+    <div>{{title}}</div>
   </div>
   <div class="flex-center">
     <app-stat-actions [game]="game" [currentPlayer]="currentPlayer" (action)="actionPerformed($event)">
     </app-stat-actions>
-    <app-statitem-list #statItemPanel [game]="game" (selectStatitem)="editStatItem($event)"
+    <app-statitem-list #statItemPanel (selectStatitem)="editStatItem($event)"
       [currentPlayer]="currentPlayer"></app-statitem-list>
   </div>
   <div class="flex-right-edge">

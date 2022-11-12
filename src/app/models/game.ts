@@ -13,11 +13,11 @@ export class Game {
     public StatItems: StatItem[];
 
     public get HomeScore(): number {
-        return this.StatItems.filter(si => si.SchoolId === this.HomeSchool.SchoolId).reduce((a, b) => a + b.Score(), 0);
+        return this.StatItems?.filter(si => si.SchoolId === this.HomeSchool.SchoolId).reduce((a, b) => a + b.Score(), 0);
     }
 
     public get VisitorScore(): number {
-        return this.StatItems.filter(si => si.SchoolId === this.VisitorSchool.SchoolId).reduce((a, b) => a + b.Score(), 0);
+        return this.StatItems?.filter(si => si.SchoolId === this.VisitorSchool.SchoolId).reduce((a, b) => a + b.Score(), 0);
     }
 
     public TeamFloorFull(player:Player) : boolean {
@@ -25,4 +25,18 @@ export class Game {
         roster=roster?.filter(p=>p.OnFloor);
         return roster?.length>=5;
        }
+    
+    public get CombinedRoster():Player[] {
+        if (this.HomeRoster && this.VisitorRoster)
+            return [...this.HomeRoster,...this.VisitorRoster];
+        else
+            return null;
+    }
+    public GetPlayer(playerId:string):Player {
+        const roster:Player[]=this.CombinedRoster;
+        if (roster)
+            return roster.find(p=>p.PlayerId===playerId);
+        else
+            return null;
+    }
 }

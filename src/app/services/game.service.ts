@@ -1,48 +1,68 @@
-import { Injectable } from '@angular/core';
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, onValue, set } from 'firebase/database';
+import { Injectable, Input, Output, EventEmitter } from '@angular/core';
+import { FirebaseApp, initializeApp } from 'firebase/app';
+import { getDatabase, ref, onValue, set, get, Database } from 'firebase/database';
+import { __asyncDelegator } from 'tslib';
 import { Game } from '../models/game';
+import { Player } from '../models/player';
+import { StatItem } from '../models/statitem';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-static readonly STATS_MODE:string="STATMODE";
-static readonly EDIT_STATITEM_MODE:string="EDITSIMODE";
+  static readonly STATS_MODE: string = "STATMODE";
+  static readonly EDIT_STATITEM_MODE: string = "EDITSIMODE";
 
-static firebaseConfig : any = {
-  apiKey: "AIzaSyBtPMWBnl2Aj6z-jN_7gqNopJfay3Zb9wI",
-  authDomain: "thshooptest.firebaseapp.com",
-  databaseURL: "https://thshooptest-default-rtdb.firebaseio.com",
-  projectId: "thshooptest",
-  storageBucket: "thshooptest.appspot.com",
-  messagingSenderId: "767237819710",
-  appId: "1:767237819710:web:5baaac7425f83a0160306f"
-};
+  @Output() gameLoaded: EventEmitter<Game> = new EventEmitter<Game>();
 
-public GameMode:String;
-  constructor() { 
-    this.GameMode=GameService.STATS_MODE;
+  static firebaseConfig: any = {
+    apiKey: "AIzaSyBtPMWBnl2Aj6z-jN_7gqNopJfay3Zb9wI",
+    authDomain: "thshooptest.firebaseapp.com",
+    databaseURL: "https://thshooptest-default-rtdb.firebaseio.com",
+    projectId: "thshooptest",
+    storageBucket: "thshooptest.appspot.com",
+    messagingSenderId: "767237819710",
+    appId: "1:767237819710:web:5baaac7425f83a0160306f"
+  };
+
+
+  public GameMode: String;
+  public app: FirebaseApp;
+  public db: Database;
+  public runGameId: any;
+
+  constructor() {
+    this.GameMode = GameService.STATS_MODE;
+    this.app = initializeApp(GameService.firebaseConfig);
+    this.db = getDatabase(this.app);
   }
 
-  public SaveGame(game:Game) {
-   
-    const app = initializeApp(GameService.firebaseConfig);
-    const db = getDatabase(app);
 
-    //const ref1 = ref(db,"/players");
-    const ref1 = ref(db);
+  public async SyncSaveGame(game: Game) {
 
-    let data: any;
-    set(ref1,game)
+    this.runGameId = setInterval(() => {
+      if (this.db && game) {
+        const ref1 = ref(this.db);
+        set(ref1, game)
+      }
+    }, 5000);
+  }
 
-    /*
-    onValue(ref1, (snapshot) => {
-      data = snapshot.val();
-      set(ref1,this.game);
-      alert("it was set3");
-    });
-    */
+  public LoadGame(callback: any) {
 
+    const ref1 = ref(this.db);
+
+    get(ref1).then((snapshot) => {
+      let g: Game = snapshot.val();
+      g = Object.assign(new Game(), g);
+      g.HomeRoster = g.HomeRoster.map(p => Object.assign(new Player(), p));
+      g.VisitorRoster = g.VisitorRoster.map(p => Object.assign(new Player(), p));
+      if (g.StatItems)
+        g.StatItems = g.StatItems.map(si => Object.assign(new StatItem(), si));
+      else
+        g.StatItems = [];
+      callback(g);
+    })
   }
 }
