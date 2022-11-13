@@ -32,5 +32,9 @@ export class Player {
             this.Fouls=items.filter(si=>si.StatCode==="FOUL")?.length;
         }
     }
+    public resetStats() {
+        this.Points=0
+        this.Fouls=0;
+    }
 
 }

@@ -39,4 +39,7 @@ export class Game {
         else
             return null;
     }
+    public ResetPlayerStats () {
+        this.CombinedRoster.forEach(p=>p.resetStats());
+    }
 }

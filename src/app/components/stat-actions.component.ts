@@ -16,6 +16,7 @@ export class StatActionsComponent {
   @Input() game: Game;
   @Input() currentPlayer: Player;
   @Output() action: EventEmitter<GameAction> = new EventEmitter<GameAction>();
+  @Output() command: EventEmitter<string> = new EventEmitter<string>();
 
   closeResult: string = "";
 
@@ -51,12 +52,16 @@ export class StatActionsComponent {
     return this.game?.TeamFloorFull(this.currentPlayer) && !this.currentPlayer?.OnFloor;
   }
 
-  public test() {
+  public selectCommand() {
     const cmd=prompt("command?");
     switch (cmd) {
       case "reset":
         this.game.StatItems=[];
+        this.game.ResetPlayerStats();
         this.action.emit(null);
+        break;
+      case "s":
+        this.command.emit("startgame");
         break;
       default:
         break;

@@ -23,7 +23,7 @@ export class AppComponent {
   @ViewChild("homeList") homeList: PlayerListComponent;
   @ViewChild("visitorList") visitorList: PlayerListComponent;
 
-  appVersion: string = "1.0.22";
+  appVersion: string = "1.0.25";
   title: string = 'THS Basketball v' + this.appVersion;
 
   public schools: School[] = [
@@ -34,6 +34,7 @@ export class AppComponent {
   public game: Game = null;
   public currentPlayer: Player = null;
   public currentStatItem: StatItem = null;
+  public gameStarted: boolean = false;
 
   constructor(http: HttpClient, private svc: GameService) {
 
@@ -44,14 +45,17 @@ export class AppComponent {
   ngOnInit(): void {
 
     this.svc.GameMode = GameService.STATS_MODE;
-    let callback = (x: any) => {
-      this.game = x;
-      this.statItemPanel.updateItems(this.game);
-      this.svc.SyncSaveGame(this.game);
-    };
-    this.svc.LoadGame(callback);
 
   }
+
+public startGame() {
+  let callback = (x: any) => {
+    this.game = x;
+    this.statItemPanel.updateItems(this.game);
+    this.svc.SyncSaveGame(this.game);
+  };
+  this.svc.LoadGame(callback);
+}
 
   public gameLoaded(newGame: Game) {
     this.game = newGame;
@@ -88,10 +92,14 @@ export class AppComponent {
       this.currentPlayer.updateStats(this.game);
     }
     else if (this.svc.GameMode === GameService.EDIT_STATITEM_MODE) {
+      // Change the statitem info
+      const origPlayer: Player = this.game.GetPlayer(this.currentStatItem.PlayerId);
       this.currentStatItem.PlayerId = player.PlayerId;
       this.currentStatItem.PlayerName = player.FullName;
+      origPlayer.updateStats(this.game);
+      player.updateStats(this.game);
       this.svc.GameMode = GameService.STATS_MODE;
-      this.currentPlayer.updateStats(this.game);
+
     }
 
   }
@@ -126,4 +134,13 @@ export class AppComponent {
     }
     this.currentPlayer?.updateStats(this.game);
   }
+
+  public commandExecute(cmd:string) {
+    switch(cmd) {
+      case "startgame":
+        this.startGame();
+        break;
+    }
+  }
+
 }
