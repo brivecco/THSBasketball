@@ -65,4 +65,11 @@ export class GameService {
       callback(g);
     })
   }
+
+  public SaveGame(game:Game) {
+    if (this.db && game) {
+      const ref1 = ref(this.db);
+      set(ref1, game)
+    }
+  }
 }

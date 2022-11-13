@@ -36,7 +36,7 @@ export class AppComponent {
   public currentStatItem: StatItem = null;
   public gameStarted: boolean = false;
 
-  constructor(http: HttpClient, private svc: GameService) {
+  constructor(private http: HttpClient, private svc: GameService) {
 
     //this.setGameData(http);
 
@@ -48,28 +48,28 @@ export class AppComponent {
 
   }
 
-public startGame() {
-  let callback = (x: any) => {
-    this.game = x;
-    this.statItemPanel.updateItems(this.game);
-    this.svc.SyncSaveGame(this.game);
-  };
-  this.svc.LoadGame(callback);
-}
+  public startGame() {
+    let callback = (x: any) => {
+      this.game = x;
+      this.statItemPanel.updateItems(this.game);
+      this.svc.SyncSaveGame(this.game);
+    };
+    this.svc.LoadGame(callback);
+  }
 
   public gameLoaded(newGame: Game) {
     this.game = newGame;
   }
 
-  private setGameData(h: HttpClient) {
+  private newGame() {
 
     //let myObj = {id:"43556A",age:366};
     //localStorage.setItem('ravioli', JSON.stringify(myObj));
-    let x = localStorage.getItem("ravioli");
-    let localValues = JSON.parse(x);
-    alert(localValues.age * 2);
+    //let x = localStorage.getItem("ravioli");
+    //let localValues = JSON.parse(x);
+    //alert(localValues.age * 2);
 
-    let t: Observable<Game> = h.get<Game>("assets/gameData.json")
+    let t: Observable<Game> = this.http.get<Game>("assets/gameData.json")
       .pipe(map(g => {
         g = Object.assign(new Game(), g);
         g.HomeRoster = g.HomeRoster.map(p => Object.assign(new Player(), p));
@@ -78,9 +78,9 @@ public startGame() {
         return g
       }));
 
-    t.subscribe(q => {
-      this.game = q;
-      //this.svc.StartGame(this.game);
+    t.subscribe(g => {
+      this.svc.SaveGame(g)
+      this.startGame();
     });
 
   }
@@ -135,10 +135,13 @@ public startGame() {
     this.currentPlayer?.updateStats(this.game);
   }
 
-  public commandExecute(cmd:string) {
-    switch(cmd) {
+  public commandExecute(cmd: string) {
+    switch (cmd) {
       case "startgame":
         this.startGame();
+        break;
+      case "newgame":
+        this.newGame();
         break;
     }
   }

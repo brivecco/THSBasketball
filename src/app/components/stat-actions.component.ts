@@ -53,15 +53,18 @@ export class StatActionsComponent {
   }
 
   public selectCommand() {
-    const cmd=prompt("command?");
+    const cmd = prompt("command?");
     switch (cmd) {
       case "reset":
-        this.game.StatItems=[];
+        this.game.StatItems = [];
         this.game.ResetPlayerStats();
         this.action.emit(null);
         break;
       case "s":
         this.command.emit("startgame");
+        break;
+      case "n":
+        this.command.emit("newgame");
         break;
       default:
         break;
