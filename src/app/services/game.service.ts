@@ -5,6 +5,9 @@ import { __asyncDelegator } from 'tslib';
 import { Game } from '../models/game';
 import { Player } from '../models/player';
 import { StatItem } from '../models/statitem';
+import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -32,7 +35,7 @@ export class GameService {
   public db: Database;
   public runGameId: any;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.GameMode = GameService.STATS_MODE;
     this.app = initializeApp(GameService.firebaseConfig);
     this.db = getDatabase(this.app);
@@ -62,14 +65,28 @@ export class GameService {
         g.StatItems = g.StatItems.map(si => Object.assign(new StatItem(), si));
       else
         g.StatItems = [];
-      callback(g);
+
+      if (callback)
+        callback(g);
     })
   }
 
-  public SaveGame(game:Game) {
+  public SaveGame(game: Game) {
     if (this.db && game) {
       const ref1 = ref(this.db);
       set(ref1, game)
     }
+  }
+
+  public pullNewGame() {
+    console.log("pull new game");
+    let t: Observable<Game> = this.http.get<Game>("https://us-central1-thshooptest.cloudfunctions.net/newGameData?text=yowsa")
+      .pipe(map(g => {
+        return g
+      }));
+
+    t.subscribe(g => {
+      console.log(g);
+    });
   }
 }

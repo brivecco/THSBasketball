@@ -53,20 +53,28 @@ export class StatActionsComponent {
   }
 
   public selectCommand() {
-    const cmd = prompt("command?");
+    let cmd = prompt("command?");
+    cmd=cmd.toLowerCase();
     switch (cmd) {
-      case "reset":
+      case "reset23":
         this.game.StatItems = [];
         this.game.ResetPlayerStats();
         this.action.emit(null);
         break;
-      case "s":
+      case "run23":
         this.command.emit("startgame");
         break;
-      case "n":
+      case "test":
+        this.command.emit("testgame");
+        break;
+      case "newgame23":
         this.command.emit("newgame");
         break;
+      case "q":
+        this.svc.pullNewGame();
+        break;
       default:
+        alert("Not a valid command")
         break;
     }
   }

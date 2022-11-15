@@ -11,5 +11,5 @@
   <button mat-raised-button class="flex-stat" (click)="registerStat('AST')">Ast</button>
   <button mat-raised-button class="flex-stat btn-other " (click)="registerStat('SUB')" [disabled]="floorFull">
     {{currentPlayer?.OnFloor ? 'Sub Out' : 'Sub In'}}</button>
-  <button mat-raised-button class="flex-stat btn-badStat" (click)="selectCommand()">Cmd</button>
+  <button mat-raised-button class="flex-stat btn-badStat" style="qdisplay:none" (click)="selectCommand()">Cmd</button>
 </div>
