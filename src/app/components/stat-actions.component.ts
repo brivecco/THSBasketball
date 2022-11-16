@@ -70,8 +70,8 @@ export class StatActionsComponent {
       case "newgame23":
         this.command.emit("newgame");
         break;
-      case "q":
-        this.svc.pullNewGame();
+      case "nextgame23":
+        this.svc.pullNextGame();
         break;
       default:
         alert("Not a valid command")

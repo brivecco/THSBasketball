@@ -61,6 +61,8 @@ export class AppComponent {
      this.svc.LoadGame(callback);
   }
 
+
+  
   public gameLoaded(newGame: Game) {
     this.game = newGame;
   }
@@ -150,6 +152,9 @@ export class AppComponent {
       case "newgame":
         this.newGame();
         break;
+        case "newgame":
+          this.newGame();
+          break;
     }
   }
 

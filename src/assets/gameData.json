@@ -177,7 +177,7 @@
         {
             "SchoolId": "MHM",
             "PlayerId": "MH44",
-            "FirstName": "Demar",
+            "FirstName": "Hank",
             "LastName": "Derozan",
 			"Height":"6-3",
             "Jersey": "44",
@@ -229,12 +229,6 @@
 			"SchoolYear":"Sr"
         }
     ],
-    "HomeRosterOnFloor": [
-    ],
-    "VisitorRosterOnFloor": [
-    ],
     "StatItems" : [
     ]
-	
-
 }

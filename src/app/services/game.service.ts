@@ -78,15 +78,15 @@ export class GameService {
     }
   }
 
-  public pullNewGame() {
-    console.log("pull new game");
+  public pullNextGame():void {
     let t: Observable<Game> = this.http.get<Game>("https://us-central1-thshooptest.cloudfunctions.net/newGameData?text=yowsa")
       .pipe(map(g => {
-        return g
+          return g;
       }));
 
-    t.subscribe(g => {
-      console.log(g);
-    });
+      t.subscribe(g=>{
+      this.SaveGame(g);
+      alert("Next game is ready")
+      });
   }
 }
