@@ -1,6 +1,6 @@
 .playerTable {
   display:table;
-  background:#d58bdd;
+  background:rgb(179, 185, 218);
   color:white;
   margin-right:10px;
   border:2px solid #400D51;
@@ -9,7 +9,7 @@
   width:18vw;
 }
 
-.onFloor {background:rgb(179, 185, 218)}
+.onFloor {background:#d58bdd}
 
 td {color:black;font-weight:bold;padding:20px;}
 
