@@ -23,7 +23,7 @@ export class AppComponent {
   @ViewChild("homeList") homeList: PlayerListComponent;
   @ViewChild("visitorList") visitorList: PlayerListComponent;
 
-  appVersion: string = "1.0.36";
+  appVersion: string = "1.0.40";
   title: string = 'THS Basketball v' + this.appVersion;
 
   public schools: School[] = [
