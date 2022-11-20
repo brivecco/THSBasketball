@@ -52,11 +52,13 @@ export class StatActionsComponent {
     return this.game?.TeamFloorFull(this.currentPlayer) && !this.currentPlayer?.OnFloor;
   }
 
+ 
+
   public selectCommand() {
     let cmd = prompt("command?");
     cmd=cmd.toLowerCase();
     switch (cmd) {
-      case "reset23":
+      case "resetstats":
         this.game.StatItems = [];
         this.game.ResetPlayerStats();
         this.action.emit(null);
@@ -70,8 +72,8 @@ export class StatActionsComponent {
       case "newgame23":
         this.command.emit("newgame");
         break;
-      case "nextgame23":
-        this.svc.pullNextGame();
+      case "nextgame":
+        this.command.emit("nextgame");
         break;
       default:
         alert("Not a valid command")

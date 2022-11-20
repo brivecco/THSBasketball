@@ -58,6 +58,7 @@ isDeleting:boolean=false;
     this.game.StatItems.splice(this.game.StatItems.indexOf(this.selectedStatItem), 1);
     this.updateItems(this.game);
     this.currentPlayer?.updateStats(this.game);
+    this.svc.Save(this.game);
     this.selectedStatItem=null;
     this.svc.GameMode=GameService.STATS_MODE;
     this.isDeleting=false;

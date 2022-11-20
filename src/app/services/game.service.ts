@@ -42,51 +42,66 @@ export class GameService {
   }
 
 
-  public async SyncSaveGame(game: Game) {
-
-    this.runGameId = setInterval(() => {
-      if (this.db && game) {
-        const ref1 = ref(this.db);
-        set(ref1, game)
-      }
-    }, 5000);
-  }
-
-  public LoadGame(callback: any) {
+  public LoadRemoteGame() {
 
     const ref1 = ref(this.db);
 
     get(ref1).then((snapshot) => {
-      let g: Game = snapshot.val();
-      g = Object.assign(new Game(), g);
-      g.HomeRoster = g.HomeRoster.map(p => Object.assign(new Player(), p));
-      g.VisitorRoster = g.VisitorRoster.map(p => Object.assign(new Player(), p));
-      if (g.StatItems)
-        g.StatItems = g.StatItems.map(si => Object.assign(new StatItem(), si));
-      else
-        g.StatItems = [];
+      let snapGame: Game = snapshot.val();
+      let savedGame: Game = Object.assign(new Game(), snapGame);
 
-      if (callback)
-        callback(g);
+      if (!savedGame)
+        return null;
+      else
+        return this.mapLoadedGame(savedGame);
     })
   }
 
-  public SaveGame(game: Game) {
+  public LoadLocalGame(): Game {
+    let savedGame: Game = JSON.parse(localStorage.getItem("currentGame"));
+    if (!savedGame)
+      return null;
+    else
+      return this.mapLoadedGame(savedGame);
+
+  }
+
+  private mapLoadedGame(savedGame: Game) {
+    let newGame: Game = Object.assign(new Game(), savedGame);
+    newGame.HomeRoster = newGame.HomeRoster.map(p => Object.assign(new Player(), p));
+    newGame.VisitorRoster = newGame.VisitorRoster.map(p => Object.assign(new Player(), p));
+    if (newGame.StatItems)
+      newGame.StatItems = newGame.StatItems.map(si => Object.assign(new StatItem(), si));
+    else
+      newGame.StatItems = [];
+
+    return newGame;
+  }
+
+  public Save(game: Game) {
+    this.SaveLocalGame(game);
+    this.SaveRemoteGame(game);
+  }
+
+  public SaveLocalGame(game: Game) {
+    localStorage.setItem('currentGame', JSON.stringify(game));
+  }
+
+  public SaveRemoteGame(game: Game) {
     if (this.db && game) {
       const ref1 = ref(this.db);
-      set(ref1, game)
+      set(ref1, game);
     }
   }
 
-  public pullNextGame():void {
-    let t: Observable<Game> = this.http.get<Game>("https://us-central1-thshooptest.cloudfunctions.net/newGameData?text=yowsa")
-      .pipe(map(g => {
-          return g;
+  public pullNextGame(): Observable<Game> {
+    return this.http.get<Game>("https://us-central1-thshooptest.cloudfunctions.net/newGameData")
+      .pipe(map(nextGame => {
+        if (!nextGame)
+        return null;
+      else
+        return this.mapLoadedGame(nextGame);
       }));
 
-      t.subscribe(g=>{
-      this.SaveGame(g);
-      alert("Next game is ready")
-      });
   }
 }

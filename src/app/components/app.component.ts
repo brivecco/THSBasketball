@@ -23,7 +23,7 @@ export class AppComponent {
   @ViewChild("homeList") homeList: PlayerListComponent;
   @ViewChild("visitorList") visitorList: PlayerListComponent;
 
-  appVersion: string = "1.0.40";
+  appVersion: string = "1.2.11";
   title: string = 'THS Basketball v' + this.appVersion;
 
   public schools: School[] = [
@@ -37,58 +37,29 @@ export class AppComponent {
   public gameStarted: boolean = false;
 
   constructor(private http: HttpClient, private svc: GameService) {
-
-    //this.setGameData(http);
-
   }
 
   ngOnInit(): void {
-
     this.svc.GameMode = GameService.STATS_MODE;
-    //this.startGame();
+    this.startGame();
   }
 
-  public startGame(saving: boolean = true) {
-  
-    let callback = (x: any) => {
-      this.game = x;
+  ngAfterViewInit(): void {
+    setTimeout(()=>this.statItemPanel.updateItems(this.game),0);
+  }
+
+  public startGame(game:Game=null) {
+    this.game=game? game : this.svc.LoadLocalGame();
+    if (this.statItemPanel)
+    this.statItemPanel.updateItems(this.game);
+  }
+
+  public startNextGame() {
+    this.svc.pullNextGame().subscribe(g => {
+      this.svc.SaveLocalGame(g);
+      this.game=g;
       this.statItemPanel.updateItems(this.game);
-      debugger;
-      if (saving)
-        this.svc.SyncSaveGame(this.game);
-    };
-
-     this.svc.LoadGame(callback);
-  }
-
-
-  
-  public gameLoaded(newGame: Game) {
-    this.game = newGame;
-  }
-
-  private newGame() {
-
-    //let myObj = {id:"43556A",age:366};
-    //localStorage.setItem('ravioli', JSON.stringify(myObj));
-    //let x = localStorage.getItem("ravioli");
-    //let localValues = JSON.parse(x);
-    //alert(localValues.age * 2);
-
-    let t: Observable<Game> = this.http.get<Game>("assets/gameData.json")
-      .pipe(map(g => {
-        g = Object.assign(new Game(), g);
-        g.HomeRoster = g.HomeRoster.map(p => Object.assign(new Player(), p));
-        g.VisitorRoster = g.VisitorRoster.map(p => Object.assign(new Player(), p));
-        g.StatItems = g.StatItems.map(si => Object.assign(new StatItem(), si));
-        return g
-      }));
-
-    t.subscribe(g => {
-      this.svc.SaveGame(g)
-      this.startGame();
     });
-
   }
 
   public playerSelected(player: Player) {
@@ -104,10 +75,9 @@ export class AppComponent {
       this.currentStatItem.PlayerName = player.FullName;
       origPlayer.updateStats(this.game);
       player.updateStats(this.game);
+      this.svc.Save(this.game);
       this.svc.GameMode = GameService.STATS_MODE;
-
     }
-
   }
 
   public editStatItem(statItem: StatItem) {
@@ -139,22 +109,15 @@ export class AppComponent {
       this.svc.GameMode = GameService.STATS_MODE;
     }
     this.currentPlayer?.updateStats(this.game);
+    this.svc.Save(this.game);
   }
 
   public commandExecute(cmd: string) {
+    
     switch (cmd) {
-      case "startgame":
-        this.startGame();
+      case "nextgame":
+        this.startNextGame();
         break;
-      case "testgame":
-        this.startGame(false);
-        break;
-      case "newgame":
-        this.newGame();
-        break;
-        case "newgame":
-          this.newGame();
-          break;
     }
   }
 

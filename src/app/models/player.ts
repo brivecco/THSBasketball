@@ -57,8 +57,18 @@ export class Player {
         }
     }
     public resetStats() {
-        this.Points = 0
+        this.ThreePointsMade = 0;
+        this.ThreePointsMissed = 0;
+        this.TwoPointsMade = 0;
+        this.TwoPointsMissed = 0;
+        this.FreeThrowsMade = 0;
+        this.FreeThrowsMissed = 0;
+        this.Points = 0;
         this.Fouls = 0;
+        this.OffRebounds = 0;
+        this.DefRebounds = 0;
+        this.Rebounds = 0;
+        this.Assists = 0;
     }
 
 }
