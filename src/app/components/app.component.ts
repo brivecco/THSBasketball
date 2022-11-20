@@ -56,7 +56,7 @@ export class AppComponent {
 
   public startNextGame() {
     this.svc.pullNextGame().subscribe(g => {
-      this.svc.SaveLocalGame(g);
+      this.svc.Save(g);
       this.game=g;
       this.statItemPanel.updateItems(this.game);
     });
