@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="rosterList" class="mat-elevation-z8 playerTable">
+<table mat-table [dataSource]="rosterList" class="mat-elevation-z8 playerTable" style="display:none">
 
   <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
@@ -11,3 +11,11 @@
 
   <tr [ngClass]="row.OnFloor ? 'onFloor' : ''" mat-row *matRowDef="let row;let i=index; columns: displayedColumns;" (click)="selectRow(row)"></tr>
 </table>
+<div  class="flex-container-stat"  [ngClass]="rosterType==='visitor' ? 'flex-right' : ''">
+  <ng-container *ngIf="this.roster.length > 0">
+    <button *ngFor="let i of this.roster" class="flex-stat" (click)="selectRow(i)" 
+    [ngClass]="i.OnFloor ? 'onFloor' : ''"
+    [innerHTML]="i.Jersey+' '+i.ShortName">
+  </button>
+   </ng-container>
+</div>

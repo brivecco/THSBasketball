@@ -27,6 +27,13 @@ export class Player {
         return this.FirstName + " " + this.LastName;
     }
 
+    public get ShortName(): string {
+        if (this.LastName.length < 6)
+            return this.LastName
+        else
+            return this.LastName.substring(0, 6);
+    }
+
     public RosterDescription(isVisitor: boolean): string {
         //return `#${this.Jersey.toString()}-${this.LastName}`;
         if (!isVisitor)
