@@ -55,11 +55,15 @@ export class PlayerListComponent implements OnInit {
 }
 
 sortRoster() {
+  
   this.roster.sort((a,b)=>{
+    return a.Jersey-b.Jersey;
+    /*
     if (a.OnFloor===b.OnFloor)
       return a.Jersey-b.Jersey;
     else
       return a.OnFloor ? -1 : 1;
+    */
   }
     );
   this.roster=[...this.roster];
@@ -69,5 +73,8 @@ sortRoster() {
     this.selectPlayer.emit(player);
   }
 
+  buttonSelectPlayer(player:Player) {
+    alert(player.LastName);
+  }
 
 }

@@ -14,3 +14,25 @@
 td {color:black;font-weight:bold;padding:20px;}
 
 td:hover {color:white}
+
+.flex-container-stat {
+  display:flex;
+  flex-wrap:wrap;
+  background-color: #8D9EFF;
+  width:100%;
+  margin:0;
+  padding-right:10px;
+}
+
+.flex-right {
+  justify-content: flex-end;
+}
+
+.flex-stat {
+  width:5vw;
+  height:8vh;
+  font-size:12px;
+  font-weight:bold;
+  margin:5px;
+  padding:5px;
+}

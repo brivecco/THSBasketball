@@ -79,8 +79,10 @@ export class GameService {
   }
 
   public Save(game: Game) {
+    setTimeout(()=> {
     this.SaveLocalGame(game);
     this.SaveRemoteGame(game);
+    },2000);
   }
 
   public SaveLocalGame(game: Game) {
