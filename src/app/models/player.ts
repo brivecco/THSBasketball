@@ -8,6 +8,7 @@ export class Player {
     public LastName: string;
     public Jersey: number;
     public Height: string;
+    public Position: string;
     public OnFloor: boolean = false;
 
     public Points: number = 0;

@@ -12,6 +12,7 @@ import { AnimationPlayer } from '@angular/animations';
 import { StatItemListComponent } from './statitem-list.component';
 import { PlayerListComponent } from './player-list.component';
 import { GameService } from '../services/game.service';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
 @Component({
   selector: 'app-root',
@@ -26,12 +27,10 @@ export class AppComponent {
   appVersion: string = "1.2.11";
   title: string = 'THS Basketball v' + this.appVersion;
 
-  public schools: School[] = [
-    { SchoolId: "tv1", Name: "Taylorville", Nickname: "Tornadoes" },
-    { SchoolId: "mtz1", Name: "Mount Zion", Nickname: "Braves" }
-  ]
+  public schools: School[];
 
   public game: Game = null;
+  public collectedStats:string[];
   public currentPlayer: Player = null;
   public currentStatItem: StatItem = null;
   public gameStarted: boolean = false;
@@ -41,7 +40,20 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.svc.GameMode = GameService.STATS_MODE;
-    this.startGame();
+    //localStorage.removeItem("collectedStats");
+    //localStorage.setItem("collectedStats",["a","b","d"].join(","));
+    let localStatSetting:string=localStorage.getItem("collectedStats");
+    if (localStatSetting ){
+      localStatSetting=localStatSetting.trim();
+      this.collectedStats=localStatSetting.split(",");
+      alert(this.collectedStats)
+      this.startGame();
+    }
+    else {
+      alert("No Stat Collection Selected!!");
+    }
+
+
   }
 
   ngAfterViewInit(): void {
@@ -50,6 +62,7 @@ export class AppComponent {
 
   public startGame(game:Game=null) {
     this.game=game? game : this.svc.LoadLocalGame();
+
     if (this.statItemPanel)
     this.statItemPanel.updateItems(this.game);
   }
@@ -117,6 +130,10 @@ export class AppComponent {
     switch (cmd) {
       case "nextgame":
         this.startNextGame();
+        break;
+      case "setcollectedstats":
+        let newCollectedStats:string=prompt("Stat Codes to Collect?");
+        localStorage.setItem("collectedStats",newCollectedStats);
         break;
     }
   }

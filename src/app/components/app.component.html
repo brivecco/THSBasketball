@@ -16,7 +16,7 @@
   <div class="flex-left-edge">
     <app-player-list #homeList [game]="game" [rosterType]="'home'" (selectPlayer)="playerSelected($event)">
     </app-player-list>
-    <div>{{title}}</div>
+    <div>{{title}}({{collectedStats}})</div>
   </div>
   <div class="flex-center">
     <app-stat-actions [game]="game" [currentPlayer]="currentPlayer" (action)="actionPerformed($event)" (command)="commandExecute($event)">
