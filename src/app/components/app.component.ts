@@ -24,7 +24,7 @@ export class AppComponent {
   @ViewChild("homeList") homeList: PlayerListComponent;
   @ViewChild("visitorList") visitorList: PlayerListComponent;
 
-  appVersion: string = "1.2.11";
+  appVersion: string = "1.3.9";
   title: string = 'THS Basketball v' + this.appVersion;
 
   public schools: School[];
@@ -46,7 +46,6 @@ export class AppComponent {
     if (localStatSetting ){
       localStatSetting=localStatSetting.trim();
       this.collectedStats=localStatSetting.split(",");
-      alert(this.collectedStats)
       this.startGame();
     }
     else {
@@ -88,7 +87,8 @@ export class AppComponent {
       this.currentStatItem.PlayerName = player.FullName;
       origPlayer.updateStats(this.game);
       player.updateStats(this.game);
-      this.svc.Save(this.game);
+      this.game.UpdateSeparatedStats(this.collectedStats);
+      this.svc.SaveStatItems(this.game,this.collectedStats);
       this.svc.GameMode = GameService.STATS_MODE;
     }
   }
@@ -122,7 +122,8 @@ export class AppComponent {
       this.svc.GameMode = GameService.STATS_MODE;
     }
     this.currentPlayer?.updateStats(this.game);
-    this.svc.Save(this.game);
+    this.game.UpdateSeparatedStats(this.collectedStats);
+    this.svc.SaveStatItems(this.game,this.collectedStats);
   }
 
   public commandExecute(cmd: string) {

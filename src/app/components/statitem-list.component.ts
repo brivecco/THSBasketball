@@ -13,15 +13,16 @@ import { GameService } from '../services/game.service';
 export class StatItemListComponent implements OnInit {
   //@Input() game: Game;
   @Input() currentPlayer: Player;
+  @Input() collectedStats: string[];
 
   @Output() selectStatitem: EventEmitter<StatItem> = new EventEmitter<StatItem>();
 
-  game:Game;
+  game: Game;
   rosterType: string = "all";
   displayedColumns: string[] = ['Description', "Edit", "Delete"];
   statItems: StatItem[];
-  selectedStatItem:StatItem;
-isDeleting:boolean=false;
+  selectedStatItem: StatItem;
+  isDeleting: boolean = false;
 
   constructor(private svc: GameService) { }
 
@@ -29,9 +30,9 @@ isDeleting:boolean=false;
     //this.updateItems();
   }
 
-  updateItems(game:Game) {
+  updateItems(game: Game) {
 
-    this.game=game;
+    this.game = game;
 
     switch (this.rosterType) {
       case "home":
@@ -49,25 +50,26 @@ isDeleting:boolean=false;
   }
 
   setDeleteMode(statItem: StatItem) {
-    this.isDeleting=true;
-    this.selectedStatItem=statItem;
+    this.isDeleting = true;
+    this.selectedStatItem = statItem;
   }
 
   deleteStatItem() {
-    this.currentPlayer=this.game?.GetPlayer(this.selectedStatItem.PlayerId);
+    this.currentPlayer = this.game?.GetPlayer(this.selectedStatItem.PlayerId);
     this.game.StatItems.splice(this.game.StatItems.indexOf(this.selectedStatItem), 1);
     this.updateItems(this.game);
     this.currentPlayer?.updateStats(this.game);
-    this.svc.Save(this.game);
-    this.selectedStatItem=null;
-    this.svc.GameMode=GameService.STATS_MODE;
-    this.isDeleting=false;
+    this.game.UpdateSeparatedStats(this.collectedStats);
+    this.svc.SaveStatItems(this.game,this.collectedStats);
+    this.selectedStatItem = null;
+    this.svc.GameMode = GameService.STATS_MODE;
+    this.isDeleting = false;
   }
 
   editStatItem(statItem: StatItem) {
     this.svc.GameMode = GameService.EDIT_STATITEM_MODE
     this.selectStatitem.emit(statItem);
-    this.selectedStatItem=statItem;
+    this.selectedStatItem = statItem;
   }
 
   clearAll() {
@@ -77,8 +79,8 @@ isDeleting:boolean=false;
 
   public cancelEdit() {
     this.svc.GameMode = GameService.STATS_MODE;
-    this.isDeleting=false;
-    this.selectStatitem=null;
+    this.isDeleting = false;
+    this.selectStatitem = null;
   }
 
   public get isEditing(): boolean {

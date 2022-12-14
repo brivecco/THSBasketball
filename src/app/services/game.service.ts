@@ -79,11 +79,19 @@ export class GameService {
   }
 
   public Save(game: Game) {
-    setTimeout(()=> {
-    this.SaveLocalGame(game);
-    this.SaveRemoteGame(game);
-    },2000);
+    setTimeout(() => {
+      this.SaveLocalGame(game);
+      this.SaveRemoteGame(game);
+    }, 0);
   }
+
+  public SaveStatItems(game: Game,statGroups:string[]) {
+    setTimeout(() => {
+      this.SaveLocalGame(game);
+      this.SaveRemoteGameStatItems(game,statGroups);
+    }, 2000);
+  }
+
 
   public SaveLocalGame(game: Game) {
     localStorage.setItem('currentGame', JSON.stringify(game));
@@ -96,13 +104,37 @@ export class GameService {
     }
   }
 
+  public SaveRemoteGameStatItems(game: Game, statGroups: string[]) {
+    if (this.db && game) {
+
+      let nodeName: string = "";
+      let node:any=null;
+
+      for (const statGroup of statGroups) {
+        switch (statGroup) {
+          case "p":
+            nodeName = "PointStatItems";
+            node=game.PointStatItems;
+            break;
+          case "r":
+            nodeName = "ReboundStatItems";
+            node=game.ReboundStatItems;
+            break;
+        }
+        const ref1 = ref(this.db, nodeName);
+        set(ref1, node);
+      }
+     
+    }
+  }
+
   public pullNextGame(): Observable<Game> {
     return this.http.get<Game>("https://us-central1-thshooptest.cloudfunctions.net/newGameData")
       .pipe(map(nextGame => {
         if (!nextGame)
-        return null;
-      else
-        return this.mapLoadedGame(nextGame);
+          return null;
+        else
+          return this.mapLoadedGame(nextGame);
       }));
 
   }

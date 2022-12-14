@@ -22,7 +22,7 @@
     <app-stat-actions [game]="game" [currentPlayer]="currentPlayer" (action)="actionPerformed($event)" (command)="commandExecute($event)">
     </app-stat-actions>
     <app-statitem-list #statItemPanel (selectStatitem)="editStatItem($event)"
-      [currentPlayer]="currentPlayer"></app-statitem-list>
+      [currentPlayer]="currentPlayer" [collectedStats]="collectedStats"></app-statitem-list>
   </div>
   <div class="flex-right-edge">
     <div style="float:right">
