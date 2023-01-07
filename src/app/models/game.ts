@@ -61,4 +61,52 @@ export class Game {
 
     }
 
+    public updateRoster(newGame: Game) {
+
+        // Add or update players
+        newGame.CombinedRoster.forEach(p => {
+            let player: Player = this.CombinedRoster.find(fp => fp.PlayerId == p.PlayerId);
+            if (player) {
+                player.FirstName = p.FirstName;
+                player.LastName = p.LastName;
+                player.Jersey = p.Jersey;
+                player.Height = p.Height;
+                player.Position = p.Position;
+            }
+            else {
+                if (p.SchoolId = this.HomeSchool.SchoolId)
+                    this.HomeRoster.push(p)
+                else
+                    this.VisitorRoster.push(p);
+            }
+        });
+
+        // Delete players
+        for (let i = 0; i < this.HomeRoster.length; i++) {
+            let player: Player = newGame.HomeRoster.find(fp => fp.PlayerId == this.HomeRoster[i].PlayerId);
+            if (!player) {
+                let playerId=this.HomeRoster[i].PlayerId;
+                this.HomeRoster.splice(i, 1);
+                this.StatItems=this.StatItems.filter(si=>si.PlayerId!== playerId);
+            }
+        }
+        for (let i = 0; i < this.VisitorRoster.length; i++) {
+            let player: Player = newGame.VisitorRoster.find(fp => fp.PlayerId == this.VisitorRoster[i].PlayerId);
+            if (!player) {
+                let playerId=this.HomeRoster[i].PlayerId;
+                this.VisitorRoster.splice(i, 1);
+                this.StatItems=this.StatItems.filter(si=>si.PlayerId!==playerId);
+            }
+        }
+
+        //  Update statitem names
+        for (let i = 0; i < this.StatItems.length; i++) {
+            let item=this.StatItems[i];
+            let player: Player = this.CombinedRoster.find(p=>p.PlayerId===item.PlayerId);
+            if (player) {
+                item.PlayerName=player.FullName;
+            }
+        }
+        
+    }
 }

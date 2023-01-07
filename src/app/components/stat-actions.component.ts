@@ -78,6 +78,9 @@ export class StatActionsComponent {
       case "colstats":
         this.command.emit("setcollectedstats");
         break;
+      case "updaterosters":
+        this.command.emit("updaterosters");
+        break;
       default:
         alert("Not a valid command")
         break;

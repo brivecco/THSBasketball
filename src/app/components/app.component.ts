@@ -24,7 +24,7 @@ export class AppComponent {
   @ViewChild("homeList") homeList: PlayerListComponent;
   @ViewChild("visitorList") visitorList: PlayerListComponent;
 
-  appVersion: string = "1.3.9";
+  appVersion: string = "1.3.14";
   title: string = 'THS Basketball v' + this.appVersion;
 
   public schools: School[];
@@ -68,8 +68,19 @@ export class AppComponent {
 
   public startNextGame() {
     this.svc.pullNextGame().subscribe(g => {
+      debugger;
       this.svc.Save(g);
       this.game=g;
+      this.statItemPanel.updateItems(this.game);
+    });
+  }
+
+  public updateRosters() {
+    this.svc.pullNextGame().subscribe(g => {
+      this.game.updateRoster(g);
+      this.currentPlayer=null;
+      this.game.UpdateSeparatedStats(this.collectedStats);
+      this.svc.SaveStatItems(this.game,this.collectedStats);
       this.statItemPanel.updateItems(this.game);
     });
   }
@@ -135,6 +146,9 @@ export class AppComponent {
       case "setcollectedstats":
         let newCollectedStats:string=prompt("Stat Codes to Collect?");
         localStorage.setItem("collectedStats",newCollectedStats);
+        break;
+      case "updaterosters":
+        this.updateRosters();
         break;
     }
   }
